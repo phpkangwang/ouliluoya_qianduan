@@ -28,7 +28,50 @@
     <script src="js/cupload.js"></script>
     <script src="js/myRoute.js"></script>
 
+    <!-- 图片插件 -->
+    <link rel="stylesheet" type="text/css" href="Sortable/FraUpload.css">
+    <!-- <script src="Sortable/jquery.min.js?v=2.1.4"></script> -->
+    <!-- 图片排序 -->
+    <script src="Sortable/Sortable.js"></script>
+    <script type="text/javascript" src="Sortable/MD5.js"></script>
+    <script type="text/javascript" src="Sortable/FraUpload.js"></script>
+
     <title>列表</title>
+    <style type="text/css">
+        .string { color: green; }
+         .number { color: darkorange; }
+         .boolean { color: blue; }
+         .null { color: magenta; }
+         .key { color: red; }
+         body{
+            padding: 1rem;
+         }
+         pre{
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            padding: 5px 10px;
+            margin: 0;
+            border-radius: 8px;
+            min-height: 20px;
+         }
+         xmp{
+            margin: 0;
+            padding: 0;
+         }
+         #upload_duixiang{
+            display: inline-block;
+            margin-bottom: 8px;
+            margin-left: 10px;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+            padding: 5px 10px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+            cursor: pointer;
+         }
+    </style>
 </head>
 
 <body>
@@ -136,35 +179,43 @@
     </div>
 </div>
 <!--添加广告样式-->
-<div id="add_ads_style" style="display:none">
+<div id="add_ads_style" style="display:none; top:0px;">
     <div class="add_adverts">
         <ul>
-            <li>
+            <li style="height:32px">
                 <label class="label_name">分类</label>
                 <span class="cont_style">
-    <select class="form-control" id="form-field-select-1">
-      <option value="AL">图片</option>
-      <option value="AK">视频</option>
-    </select></span>
+                <select class="form-control" id="form-field-select-1">
+                  <option value="AL">图片</option>
+                  <option value="AK">视频</option>
+                </select></span>
             </li>
-            <li>
-                <label class="label_name">标题</label><span class="cont_style"><input name="标题" type="text"
-                                                                                    id="form-field-1" placeholder="标题"
-                                                                                    class="col-xs-10 col-sm-5"
-                                                                                    style="width:300px"></span>
+            <li style="height:32px">
+                <label class="label_name">标题</label>
+                <span class="cont_style">
+                  <input name="标题" type="text" id="form-field-1" placeholder="标题" class="col-xs-10 col-sm-5" style="width:300px">
+                </span>
             </li>
-            <li>
-                <label class="label_name">描述</label><span class="cont_style"><input name="描述" type="text"
-                                                                                    id="form-field-1" placeholder="描述"
-                                                                                    class="col-xs-10 col-sm-5"
-                                                                                    style="width:500px"></span>
+            <li style="height:32px">
+                <label class="label_name">描述</label>
+                <span class="cont_style">
+                  <input name="描述" type="text" id="form-field-1" placeholder="描述" class="col-xs-10 col-sm-5" style="width:500px">
+                </span>
             </li>
             <li>
                 <label class="label_name">图片</label>
-                <span class="cont_style">
-      <div id="cupload-create" style="margin-left:10px;"></div>
-      <p style="color:red;margin-left:10px;">仅支持.jpg;.png;.jpeg格式的图片</p>
-    </span>
+                <div class="cont_style">
+                  <!-- <div id="cupload-create" style="margin-left:10px;"></div>
+                  <p style="color:red;margin-left:10px;">仅支持.jpg;.png;.jpeg格式的图片</p> -->
+                  <form enctype="multipart/form-data">
+                      <input type="hidden" id="imagepath" name="">  <!-- 保存的图片id 用于表单提交 -->
+                      <span id="upload_duixiang">上传</span><!-- 上传按钮 -->
+                      <div class="show"></div> <!-- 输出图片 -->
+                      <!-- <pre id="geoJsonTxt"></pre> -->
+                       <!-- 输出文件的json数据 -->
+                  </form>
+
+                </div>
             </li>
         </ul>
     </div>
@@ -221,28 +272,95 @@
 
 <script>
     //默认可能上传3张
-    var cuploadCreate = new Cupload({
-        ele: '#cupload-create',
-        num: 3,
-    });
+    // var cuploadCreate = new Cupload({
+    //     ele: '#cupload-create',
+    //     num: 3,
+    // });
     //图片上传插件可选参数
-    // {
-    // ele: "#cupload", // 实例化的DOM对象id,必需,默认为cupload
-    // name: "image", // 图片input的name名,非必需,默认为image
-    // num: 1, // 可上传图片的数量,非必需,默认为1
-    // width: 148, // 预览框的宽,单位为px,非必需,默认为148
-    // height: 148, // 预览框的高,单位为px,非必需,默认为148
-    // minSize: 1024, // 图片大小最小限制,单位为KB,非必需,无默认值
-    // maxSize: 2048, // 图片大小最大限制,单位为KB,非必需,无默认值
-    // limitedSize: 2048, // 图片大小要求,单位为KB,非必需,无默认值
-    // minWidth: 100, // 图片宽度最小限制,单位为px,非必需,无默认值
-    // minHeight: 100, // 图片高度最小限制,单位为px,非必需,无默认值
-    // maxWidth: 2000, // 图片宽度最大限制,单位为px,非必需,无默认值
-    // maxHeight: 2000, // 图片高度最大限制,单位为px,非必需,无默认值
-    // limitedWidth: 800, // 图片宽度要求,单位为px,非必需,无默认值
-    // limitedHeight: 800, // 图片高度要求,单位为px,非必需,无默认值
-    // data: ["1.png", "2.jpg"], // 编辑模式下初始显示的图片路径,非必需,无默认值
-    // }
+
+    // 商品图片上传
+    a = $("#upload_duixiang").FraUpload({
+        view        : ".show",      // 视图输出位置
+        url         : "upload.php", // 上传接口
+        fetch       : "img",   // 视图现在只支持img
+        debug       : false,    // 是否开启调试模式
+        /* 外部获得的回调接口 */
+        onLoad: function(e){                    // 选择文件的回调方法
+            console.log("外部: 初始化完成...");
+        },
+        breforePort: function (e) {         // 发送前触发
+            console.log("文件发送之前触发");
+        },
+        successPort: function (e) {         // 发送成功触发
+            console.log("文件发送成功");
+            onload_image()
+        },
+        errorPort: function (e) {       // 发送失败触发
+            console.log("文件发送失败");
+            onload_image()
+        },
+        deletePost: function(e){    // 删除文件触发
+            console.log("删除文件");
+            console.log(e);
+            alert('删除了'+e.filename)
+            onload_image()
+        },
+        sort: function(e){      // 排序触发
+            console.log("排序");
+            onload_image()
+        },
+    });
+
+    // 获取图片上传信息
+    function onload_image(){
+        var res = a.FraUpload.show()
+        var ids = [];
+        for(let k in res){
+            this_val = res[k]
+            if(!empty(res[k]['is_upload']) && !empty(res[k]['ajax'])){
+                ajax_value = res[k]['ajax'];
+                ids.push(ajax_value.data.id)
+            }
+        }
+        $("#imagepath").val(ids);
+        $('#geoJsonTxt').html(JsonFormat(res));
+    }
+
+    // 将类库返回的json打印到pre中
+    function JsonFormat(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+            json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                 var cls = 'number';
+                    if (/^"/.test(match)) {
+                            if (/:$/.test(match)) {
+                                cls = 'key';
+                            } else {
+                                cls = 'string';
+                            }
+                    } else if (/true|false/.test(match)) {
+                        cls = 'boolean';
+                    } else if (/null/.test(match)) {
+                        cls = 'null';
+                    }
+                    return '<span class="' + cls + '">' + match + '</span>';
+             });
+    }
+    /**
+     * 判断变量是否为空
+     */
+    function empty(value) {
+        if(value=="" || value==undefined || value==null || value==false || value==[] || value=={}){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+
 
     /*用户-停用*/
     function member_stop(obj, id) {
@@ -378,6 +496,37 @@
             success: function (res) {
                 var content = initContent(res.data);
                 $('#content').html(content);
+
+                //
+                var oTable1 = $('#sample-table').dataTable( {
+                "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+                "bStateSave": true,//状态保存
+                "searching" : false,
+                "aoColumnDefs": [
+                  //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+                  {"orderable":false,"aTargets":[0,2,3,4,5,6]}// 制定列不参与排序
+                ] } );
+
+                //选择所有
+                $('table th input:checkbox').on('click' , function(){
+                  var that = this;
+                  $(this).closest('table').find('tr > td:first-child input:checkbox')
+                  .each(function(){
+                    this.checked = that.checked;
+                    $(this).closest('tr').toggleClass('selected');
+                  });
+
+                });
+                //选择单个值
+                $('#content > tr > td:first-child input:checkbox').on('click' , function(){
+                  var that = this;
+                  var curHtml = $(this).parent('label').parent('td').siblings()[0];
+                  console.log(this);
+                  $(curHtml).each(function(){
+                    var val = $(this).text();
+                    console.log(val);
+                    });
+                });
             }
         });
     }
@@ -423,4 +572,3 @@
         return content;
     }
 </script>
-
