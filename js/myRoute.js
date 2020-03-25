@@ -1,5 +1,6 @@
 //配置服务器请求地址
 var domain = "http://127.0.0.1/ouliluoya_backend/backend/web";
+var imageUrl = "http://127.0.0.1/ouliluoya_backend/backend/web/image/";
 
 
 //##########################   配置接口地址  ###################################
@@ -17,6 +18,19 @@ var bannelUpdateStatus = domain + "/bannel/update-status";
 
 //bannel排序 上移或者下移
 var bannelExchangePosition = domain + "/bannel/exchange-position";
+
+//添加bannel
+var bannelAdd= domain + "/bannel/add";
+
+//删除bannel
+var bannelDel= domain + "/bannel/del";
+
+//上传文件
+var uploadFile = domain + "/bannel/upload-file";
+
+
+
+
 
 
 
