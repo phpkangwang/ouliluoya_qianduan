@@ -35,7 +35,9 @@ a:hover{ color:#F90}
 .mleft{ margin-left:10px;}
 .margin{ margin:15px;}
 .border{ border:1px solid #ddd; padding:5px; height:50px; line-height:36px; margin-bottom:20px; }
-.border  span{ display:block; height:100%;}
+.border  span{
+	/* display:block;  */
+	height:100%;}
 .table_menu_list{}
 .alert { margin-top:20px;}
 body
@@ -604,7 +606,7 @@ body
 #add_administrator_style textarea{ margin-left:0px;}
 .admin_info_style .form-group input[disabled]{background-color: #FFFFFF !important;}
 .admin_info_style .text_info.add {border: 1px solid #ddd;}
-.admin_info_style .admin_modify_style{ width:400px; border-right:1px solid #dddddd; float:left }
+.admin_info_style .admin_modify_style{ width:100%; float:left }
 .admin_info_style  .xinxi,
 .admin_info_style .recording_list{ padding:10px;}
 .admin_info_style  .xinxi .add_sex ,
@@ -613,7 +615,7 @@ body
 .admin_info_style .Button_operation button{ float:left;}
 .admin_info_style .Button_operation .btn-success{ display:none}
 .admin_info_style  .xinxi span{ color:#858585}
-.admin_info_style .recording_style{ margin-left:400px; float:left; position:absolute;}
+.admin_info_style .recording_style{ margin-left:0px; float:left; position:absolute;}
 /*********************用户权限样式属性***************************/
 .Competence_info{ border:1px solid #ddd; margin:10px;}
 .Competence_info  .Competence_name{height:40px; line-height:40px; background-color:#E9EFFE;border-bottom:1px solid #ddd; text-align:center}
@@ -662,7 +664,8 @@ body
 .Ads_list.Widescreen,
 .order_list_style.Widescreen { margin-left:0px;}
 #add_ads_style .add_adverts{ padding:15px;}
-#add_ads_style .add_adverts li{ height:32px; line-height:30px; margin:10px 0px;}
+/* #add_ads_style .add_adverts li{ height:32px; line-height:30px; margin:10px 0px;} */
+#add_ads_style .add_adverts li{ margin:10px 0px;}
 #add_ads_style .add_adverts li .label_name{ width:80px; float:left;text-align:right}
 #add_ads_style .add_adverts li .cont_style{ float:left; width:600px; position:relative;}
 #add_ads_style .add_adverts li .cont_style select.form-control{ width:220px; margin-left:10px}
