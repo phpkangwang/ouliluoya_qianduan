@@ -20,7 +20,7 @@
 		<script src="assets/js/typeahead-bs2.min.js"></script>
 		<script src="assets/js/jquery.dataTables.min.js"></script>
 		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
-
+    <script src="js/myRoute.js"></script>
 <title>个人信息管理</title>
 </head>
 
@@ -33,47 +33,17 @@
      <table class="table table-border table-bordered table-bg table-hover table-sort" id="sample-table">
     <thead>
       <tr class="text-c">
-        <th width="25"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
-        <th width="80">ID</th>
+        <th width="80">用户ID</th>
+        <th width="80">昵称</th>
         <th width="100">类型</th>
         <th>内容</th>
-        <th width="17%">登陆地点</th>
-        <th width="10%">用户名</th>
-        <th width="120">客户端IP</th>
-        <th width="150">时间</th>
+        <th width="120">登陆IP</th>
+        <th width="17%">登陆地址</th>
+        <th width="150">登陆时间</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
-        <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-        <td>15686</td>
-        <td>1</td>
-        <td>登录成功!</td>
-        <td>江苏南京</td>
-        <td>admin</td>
-        <td>61.233.7.80</td>
-        <td>2014-6-11 11:11:42</td>
-      </tr>
-         <tr>
-        <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-        <td>15686</td>
-        <td>1</td>
-        <td>登录成功!</td>
-        <td>江苏南京</td>
-        <td>admin</td>
-        <td>61.233.7.80</td>
-        <td>2014-6-11 11:11:42</td>
-      </tr>
-         <tr>
-        <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-        <td>15686</td>
-        <td>1</td>
-        <td>登录成功!</td>
-        <td>江苏南京</td>
-        <td>admin</td>
-        <td>61.233.7.80</td>
-        <td>2014-6-11 11:11:42</td>
-      </tr>
+    <tbody id="content">
+
     </tbody>
   </table>
     </div>
@@ -131,4 +101,44 @@ jQuery(function($) {
             });
         });
 });
+
+initPage();
+//初始化这一页的数据
+function initPage() {
+    //分页获取数据
+    var data = {};
+    data.token = localStorage.token;
+    data.pageNo = 1;
+    data.pageSize = 10;
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: logPage,
+        data: data,
+        success: function (res) {
+            var content = initContent(res.data);
+            $('#content').html(content);
+        }
+    });
+}
+
+//动态加载数据内容
+function initContent(data) {
+    var type =new Array();
+    type[1]="Bannel操作";
+    type[2]="用户操作";
+    var content = "";
+    for (var i in data) {
+        content += '<tr>\n' +
+            '                <td>' + data[i].account_id + '</td>\n' +
+            '                <td>' + data[i].name + '</td>\n' +
+            '                <td>' + type[data[i].type] + '</td>\n' +
+            '                <td>' + data[i].content + '</td>\n' +
+            '                <td>' + data[i].ip + '</td>\n' +
+            '                <td>' + data[i].ip_address + '</td>\n' +
+            '                <td>' + data[i].create_time + '</td>\n' +
+            '</tr>\n';
+    }
+    return content;
+}
 </script>

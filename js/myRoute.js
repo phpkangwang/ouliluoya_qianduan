@@ -25,6 +25,13 @@ var bannelAdd= domain + "/bannel/add";
 //删除bannel
 var bannelDel= domain + "/bannel/del";
 
+
+//日志列表
+var logPage = domain + "/log/page";
+
+//添加后台账户
+var userAdd= domain + "/user/add";
+
 //上传文件
 var uploadFile = domain + "/bannel/upload-file";
 
