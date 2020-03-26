@@ -36,6 +36,11 @@
     <script type="text/javascript" src="Sortable/MD5.js"></script>
     <script type="text/javascript" src="Sortable/FraUpload.js"></script>
 
+    <!-- 视频插件 -->
+    <link rel="stylesheet" type="text/css" href="css/upload.css">
+    <script type="text/javascript" src="js/plupload.full.min.js"></script>
+    <script type="text/javascript" src="js/upload.js"></script>
+
     <title>列表</title>
     <style type="text/css">
         .string { color: green; }
@@ -134,7 +139,7 @@
                   <input name="描述" type="text" id="image_content" placeholder="描述" class="col-xs-10 col-sm-5" style="width:500px">
                 </span>
             </li>
-            <li>
+            <li style="display:none">
                 <label class="label_name">图片</label>
                 <div class="cont_style">
                   <!-- <div id="cupload-create" style="margin-left:10px;"></div>
@@ -147,6 +152,58 @@
                        <!-- 输出文件的json数据 -->
                   </form>
 
+                </div>
+            </li>
+            <li>
+                <label class="label_name">视频</label>
+                <div class="cont_style">
+                  <div class="video_box_outside" id="video_box_outside" tabindex="2001">
+                      <div class="video_box">
+                          <div id="video_upload_area">
+                              <div class="video_notice">支持上传大小在1GB以内的视频，请勿上传色情、反动等违法视频</div>
+                              <div class="video_textarea_upload" id="video_textarea_upload">
+                                  <div class="video_upload_words">
+                                      <a class="video_upload_btn" id="video_upload_btn">+</a>
+                                      <a class="video_name_box" id="video_name_box" href="javascript:void(0)">
+                                          <img src="images/icon_video.png" style="width:13.5px;height: 9px"/>
+                                          <em id="video_file_name"></em>
+                                          <span class="photo_upload_close" onclick="reupload_video()" href="javascript:void(0);"></span>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="layer_point">
+                              <dl id="video_loading" class="point clearfix" style="display: none; padding: 0 0 60px">
+                                  <dt style="" id="loading_bar">
+                                      <span class="loading_bar"><em id="percent" style="width: 27%;"></em></span>
+                                      <span id="percentnum" class="S_txt2 load_num">27%</span>
+                                  </dt>
+                                  <dd>
+                                      <p id="updesc">视频上传中...</p>
+                                      <p class="S_txt2"><label id="uploading_tip">上传速度取决于您的网速，请耐心等待。</label><a href="javascript:void(0);" id="video_upload_cancel" onclick="video_upload_cancel()">取消上传</a>
+                                      </p>
+                                  </dd>
+                              </dl>
+                              <div id="video_success" style="display: none">
+                                  <dl class="point clearfix">
+                                      <dt>
+                                          <span class="W_icon icon_succB"></span>
+                                      </dt>
+                                      <dd>
+                                          <p id="upload_succ">视频上传成功</p>
+                                      </dd>
+                                  </dl>
+                                  <div class="upload_know">
+                                      <a class="btn" href="javascript:void(0);" onclick="fadeout_div('#video_box_outside')">我知道了</a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="upload_video_area" id="upload_video_area">
+                              <a id="upload_video" class="btn disabled" href="javascript:void(0);">开始上传</a>
+                          </div>
+                      </div>
+                      <div id="video_iput"></div>
+                  </div>
                 </div>
             </li>
         </ul>
