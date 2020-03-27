@@ -215,7 +215,7 @@
     //视频上传插件
     var uploader_video = new plupload.Uploader({//创建实例的构造方法
         browse_button: 'video_upload', // 上传按钮
-        url: 'upload.php', //远程上传地址
+        url: uploadFile, //远程上传地址
         flash_swf_url : 'js/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
         silverlight_xap_url : 'js/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
         filters: {
@@ -254,6 +254,7 @@
         $("#video_loading").hide();
         $("#video_success").show();
         var data = eval("(" + info.response + ")");//解析返回的json数据
+        console.log(data);
         $("#video_iput").html("<input type='hidden'id='video_file' value='" + data.pic + "'/><input type='hidden'id='video_name' value='" + data.name + "'/>");
     });
     //最后给"开始上传"按钮注册事件
