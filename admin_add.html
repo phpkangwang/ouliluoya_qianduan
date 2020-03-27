@@ -38,26 +38,24 @@
           <div class="col-sm-9"><input type="password" name="密码" id="psw" value="" class="col-xs-7 text_info" disabled="disabled"></div>
         </div>
           <div class="form-group"><label class="col-sm-3 control-label no-padding-right" for="form-field-1">性别： </label>
-          <div class="col-sm-9">
-          <span class="sex">男</span>
-            <div class="add_sex">
-            <label><input name="form-field-radio" type="radio" name="sex" class="ace" checked="checked" value="3"><span class="lbl">保密</span></label>&nbsp;&nbsp;
-            <label><input name="form-field-radio" type="radio" name="sex" class="ace"><span class="lbl" value="1">男</span></label>&nbsp;&nbsp;
-            <label><input name="form-field-radio" type="radio" name="sex" class="ace"><span class="lbl" value="2">女</span></label>
+            <div class="col-sm-9">
+              <div class="add_sex">
+                <input type="radio" name="sex" value="male" checked="true" />男
+                <input type="radio" style="margin-left:10px" name="sex" value="female" />女
+              </div>
             </div>
-           </div>
           </div>
           <div class="form-group"><label class="col-sm-3 control-label no-padding-right" for="form-field-1">姓名： </label>
-              <div class="col-sm-9"><input type="text" name="姓名" id="name" value="" class="col-xs-7 text_info" disabled="disabled"></div>
+            <div class="col-sm-9"><input type="text" name="姓名" id="name" value="" class="col-xs-7 text_info" disabled="disabled"></div>
           </div>
           <div class="form-group"><label class="col-sm-3 control-label no-padding-right" for="form-field-1">年龄： </label>
-          <div class="col-sm-9"><input type="text" name="年龄" id="age" value="" class="col-xs-7 text_info" disabled="disabled"></div>
+            <div class="col-sm-9"><input type="text" name="年龄" id="age" value="" class="col-xs-7 text_info" disabled="disabled"></div>
           </div>
           <div class="form-group"><label class="col-sm-3 control-label no-padding-right" for="form-field-1">移动电话： </label>
-          <div class="col-sm-9"><input type="text" name="移动电话" id="phone" value="" class="col-xs-7 text_info" disabled="disabled"></div>
+            <div class="col-sm-9"><input type="text" name="移动电话" id="phone" value="" class="col-xs-7 text_info" disabled="disabled"></div>
           </div>
           <div class="form-group"><label class="col-sm-3 control-label no-padding-right" for="form-field-1">电子邮箱： </label>
-          <div class="col-sm-9"><input type="text" name="电子邮箱" id="email" value="" class="col-xs-7 text_info" disabled="disabled"></div>
+            <div class="col-sm-9"><input type="text" name="电子邮箱" id="email" value="" class="col-xs-7 text_info" disabled="disabled"></div>
           </div>
           <div class="form-group"><label class="col-sm-3 control-label no-padding-right" for="form-field-1">QQ： </label>
             <div class="col-sm-9"><input type="text" name="QQ" id="qq" value="" class="col-xs-7 text_info" disabled="disabled"> </div>
@@ -109,7 +107,7 @@ function save_info(){
 		  if(num>0){  return false;}
           else{
               var data = {};
-              data.account = $("#account").val();;
+              data.account = $("#account").val();
               data.password = $("#psw").val();
               data.sex = $('input[name="sex"]:checked').val();
               data.name = $("#name").val();
@@ -139,13 +137,18 @@ function save_info(){
 
 	};
  //初始化宽度、高度
-    $(".admin_modify_style").height($(window).height());
-	$(".recording_style").width($(window).width()-400);
+  $(".admin_modify_style").height($(window).height());
     //当文档窗口发生改变时 触发
-    $(window).resize(function(){
+  $(window).resize(function(){
 	$(".admin_modify_style").height($(window).height());
-	$(".recording_style").width($(window).width()-400);
   });
+
+  //选择男女
+  $("input[name=sex]").click(function(){
+    var sex = $(this).val();
+    alert(sex);
+  });
+
   //修改密码
   function change_Password(){
 	   layer.open({
