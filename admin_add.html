@@ -40,8 +40,8 @@
           <div class="form-group"><label class="col-sm-3 control-label no-padding-right" for="form-field-1">性别： </label>
             <div class="col-sm-9">
               <div class="add_sex">
-                <input type="radio" name="sex" value="male" checked="true" />男
-                <input type="radio" style="margin-left:10px" name="sex" value="female" />女
+                <input type="radio" name="sex" value="1" checked="true" />男
+                <input type="radio" style="margin-left:10px" name="sex" value="2" />女
               </div>
             </div>
           </div>
@@ -144,10 +144,10 @@ function save_info(){
   });
 
   //选择男女
-  $("input[name=sex]").click(function(){
-    var sex = $(this).val();
-    alert(sex);
-  });
+  // $("input[name=sex]").click(function(){
+  //   var sex = $(this).val();
+  //   alert(sex);
+  // });
 
   //修改密码
   function change_Password(){
