@@ -529,6 +529,7 @@
                     //成功后刷新这个页面
                     $(obj).parents("tr").remove();
                     layer.msg('已删除!', {icon: 1, time: 1000});
+                    location.reload();
                 }
             });
         });
@@ -641,13 +642,14 @@
     $('#all_del').on('click', function () {
         layer.confirm('确认要批量删除吗？', function (index) {
             //$(obj).parents("tr").remove();
+            alert(allNoArr);
             layer.msg('已删除!', {icon: 1, time: 1000});
+            location.reload();
         });
     })
 
-    //选择所有选择项
+    //多选项选择了所有选择项
     function choiceAllList(){
-      //allNoArr = [];
       $('table th input:checkbox').on('click' , function(){
         var that = this;
         $(this).closest('table').find('tr > td:first-child input:checkbox')
@@ -663,33 +665,46 @@
           $(this).closest('tr').toggleClass('selected');
         });
         var newArr = unique(allNoArr);
-        console.log("abc:"+newArr);
+        allNoArr = newArr;
+        //console.log("allNoArr:"+allNoArr);
+      });
+    }
+    //多选项选择了单个选择项
+    function choiceSingleList(){
+      $('#content > tr > td:first-child input:checkbox').on('click' , function(){
+        var that = this;
+        this.checked = that.checked;
+        var dom=$(this);
+        //console.log("curArr:"+allNoArr);
+        //console.log("status:"+dom.is(':checked'));
+        var curHtml = $(this).parent('label').parent('td').siblings()[0];
+        $(curHtml).each(function(){
+            var val = $(this).text();
+            //console.log("cur:"+val);
+            if(dom.is(':checked')){//选中，添加到数组后并去重
+              allNoArr.push(val);
+              var newArr = unique(allNoArr);
+              allNoArr = newArr;
+              console.log("add:"+allNoArr);
+            }else{
+              if(allNoArr.indexOf(val) > -1){ //取消或没选，则查询位置并删除数组中已有数据。
+                //console.log("2:"+allNoArr.indexOf(val));
+                allNoArr.splice(allNoArr.indexOf(val),1)
+                console.log("del:"+allNoArr);
+              }
+            }
+            //
+          });
       });
     }
 
-    //去重
+    //数组去重
     function unique(arr) {
         var obj = {};
         return arr.filter(function(item, index, arr){
             return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
         })
     }
-
-    //选择单个值
-    function choiceSingleList(){
-      $('#content > tr > td:first-child input:checkbox').on('click' , function(){
-        var that = this;
-        var curHtml = $(this).parent('label').parent('td').siblings()[0];
-        console.log(this);
-        $(curHtml).each(function(){
-          var val = $(this).text();
-          //allNoArr.push(val);
-          console.log(val);
-          });
-      });
-    }
-
-
 
     //动态加载数据内容
     function initContent(data) {
@@ -709,7 +724,8 @@
         var BANNEL_STATUS=new Array();
         BANNEL_STATUS[1]="已启用";
         BANNEL_STATUS[2]="已停用";
-
+        //<video src="' + imageUrl+data[i].image_url + '" width="140px" controls="controls"></video>
+        //<img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/>
         var content = "";
         for (var i in data) {
             content += '<tr>\n' +
