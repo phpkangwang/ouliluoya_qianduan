@@ -86,6 +86,7 @@
        <span class="l_f">
         <a href="javascript:;" id="ads_add" title="添加屏保" class="btn btn-warning Order_form"><i class="fa fa-plus"></i> 添加屏保</a>
         <a href="javascript:;" id="all_del" class="btn btn-danger"><i class="fa fa-trash"></i> 批量删除</a>
+        <input type='hidden' id='all_del_no' value=''/>
            <!-- <a href="javascript:ovid()" onClick="javascript :history.back(-1);" class="btn btn-info"><i class="fa fa-reply"></i> 返回上一步</a> -->
        </span>
             <span class="r_f">共：<b><span id="pageCount">234</span></b>条记录</span>
@@ -348,7 +349,7 @@
                     data.title = $("#image_title").val();
                     data.content = $("#image_content").val();
                     var image_url = $("#imagepath").val();
-                    var video_url =  $("#video_name").val();              
+                    var video_url =  $("#video_name").val();
                     if( video_url == null || video_url == "")
                     {
                         data.image_url_str = image_url;
@@ -377,15 +378,6 @@
             }
         });
     })
-
-    /*批量删除*/
-    $('#all_del').on('click', function () {
-        layer.confirm('确认要批量删除吗？', function (index) {
-            $(obj).parents("tr").remove();
-            layer.msg('已删除!', {icon: 1, time: 1000});
-        });
-    })
-
 </script>
 
 <script>
@@ -522,6 +514,7 @@
 
     /*产品-删除*/
     function member_del(obj, id) {
+      console.log(id);
         layer.confirm('确认要删除吗？', function (index) {
             //分页获取数据
             var data = {};
@@ -642,18 +635,46 @@
         {"orderable":false,"aTargets":[0,2,3,4,5,6]}// 制定列不参与排序
       ] } );
     }
+
+    /*批量删除*/
+    var allNoArr = [];
+    $('#all_del').on('click', function () {
+        layer.confirm('确认要批量删除吗？', function (index) {
+            //$(obj).parents("tr").remove();
+            layer.msg('已删除!', {icon: 1, time: 1000});
+        });
+    })
+
     //选择所有选择项
     function choiceAllList(){
+      //allNoArr = [];
       $('table th input:checkbox').on('click' , function(){
         var that = this;
         $(this).closest('table').find('tr > td:first-child input:checkbox')
         .each(function(){
-          console.log(this);
+          //console.log(this.);
+          var curHtml = $(this).parent('label').parent('td').siblings()[0];
+          $(curHtml).each(function(){
+            var val = $(this).text();
+            //console.log(val);
+            allNoArr.push(val);
+            });
           this.checked = that.checked;
           $(this).closest('tr').toggleClass('selected');
         });
+        var newArr = unique(allNoArr);
+        console.log("abc:"+newArr);
       });
     }
+
+    //去重
+    function unique(arr) {
+        var obj = {};
+        return arr.filter(function(item, index, arr){
+            return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
+        })
+    }
+
     //选择单个值
     function choiceSingleList(){
       $('#content > tr > td:first-child input:checkbox').on('click' , function(){
@@ -662,6 +683,7 @@
         console.log(this);
         $(curHtml).each(function(){
           var val = $(this).text();
+          //allNoArr.push(val);
           console.log(val);
           });
       });
