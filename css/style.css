@@ -681,7 +681,7 @@ body
 .Competence_add_style .wordage{ display:block; margin-left:10px; float:left;}
 .sort_style_add li textarea.form-control{ width:500px; height:150px; resize:none;}
 .sort_style_add .label_name{width:80px; float:left;text-align:right}
-.sort_Ads_list .ad_img{ overflow:hidden; width:100%; height:80px; display:block; text-align:center}
+.sort_Ads_list .ad_img{ overflow:hidden; width:140px; height:80px; display:block; text-align:center}
 /**************************/
 .state-overview .Info .symbol{ padding:10px}
 .state-overview .Info .value{ padding-top:15px;}
