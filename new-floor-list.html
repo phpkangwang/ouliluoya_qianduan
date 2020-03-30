@@ -1,285 +1,749 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css"/>
-<link href="assets/css/codemirror.css" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/colorbox.css">
- <!--图片相册-->
-<link rel="stylesheet" href="assets/css/ace.min.css" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link href="assets/css/codemirror.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/colorbox.css">
+    <!--图片相册11122244441-->
+    <link rel="stylesheet" href="assets/css/ace.min.css"/>
 
-<link rel="stylesheet" href="font/css/font-awesome.min.css" />
-<!--[if lte IE 8]>
-<link rel="stylesheet" href="assets/css/ace-ie.min.css" />
-<![endif]-->
-<script src="js/jquery-1.9.1.min.js"></script>
-<script src="assets/js/jquery.colorbox-min.js"></script>
-<script src="assets/js/typeahead-bs2.min.js"></script>
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
-<script src="assets/layer/layer.js" type="text/javascript" ></script>
-<script src="js/cupload.js"></script>
+    <link rel="stylesheet" href="font/css/font-awesome.min.css"/>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="assets/css/ace-ie.min.css"/>
+    <![endif]-->
+    <script src="js/jquery-1.9.1.min.js"></script>
+    <script src="assets/js/jquery.colorbox-min.js"></script>
+    <script src="assets/js/typeahead-bs2.min.js"></script>
+    <script src="assets/js/jquery.dataTables.min.js"></script>
+    <script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+    <script src="assets/layer/layer.js" type="text/javascript"></script>
+    <script src="js/cupload.js"></script>
+    <script src="js/myRoute.js"></script>
 
-<title>列表</title>
+    <!-- 图片插件 -->
+    <link rel="stylesheet" type="text/css" href="Sortable/FraUpload.css">
+    <!-- <script src="Sortable/jquery.min.js?v=2.1.4"></script> -->
+    <!-- 图片排序 -->
+    <script src="Sortable/Sortable.js"></script>
+    <script src="Sortable/MD5.js"></script>
+    <script src="Sortable/FraUpload.js"></script>
+
+    <!-- 视频插件 -->
+    <link rel="stylesheet" type="text/css" href="css/upload.css">
+    <script src="js/plupload.full.min.js"></script>
+    <!-- <script src="js/upload.js"></script> -->
+
+    <title>列表</title>
+    <style type="text/css">
+        .string { color: green; }
+         .number { color: darkorange; }
+         .boolean { color: blue; }
+         .null { color: magenta; }
+         .key { color: red; }
+         body{
+            padding: 1rem;
+         }
+         pre{
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            padding: 5px 10px;
+            margin: 0;
+            border-radius: 8px;
+            min-height: 20px;
+         }
+         xmp{
+            margin: 0;
+            padding: 0;
+         }
+         #upload_duixiang{
+            display: inline-block;
+            margin-bottom: 8px;
+            margin-left: 10px;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+            padding: 5px 10px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+            cursor: pointer;
+         }
+    </style>
 </head>
 
 <body>
 <div class="page-content clearfix">
- <div class="sort_adsadd_style">
-  <div class="border clearfix">
+    <div class="sort_adsadd_style">
+       <div class="border clearfix">
        <span class="l_f">
-        <a href="javascript:;"  id="ads_add" title="添加屏保" class="btn btn-warning Order_form"><i class="fa fa-plus"></i> 添加楼层</a>
+        <a href="javascript:;" id="ads_add" title="添加屏保" class="btn btn-warning Order_form"><i class="fa fa-plus"></i> 添加楼层</a>
         <a href="javascript:;" id="all_del" class="btn btn-danger"><i class="fa fa-trash"></i> 批量删除</a>
-        <!-- <a href="javascript:ovid()" onClick="javascript :history.back(-1);" class="btn btn-info"><i class="fa fa-reply"></i> 返回上一步</a> -->
+        <input type='hidden' id='all_del_no' value=''/>
+           <!-- <a href="javascript:ovid()" onClick="javascript :history.back(-1);" class="btn btn-info"><i class="fa fa-reply"></i> 返回上一步</a> -->
        </span>
-       <span class="r_f">共：<b>234</b>条记录</span>
-     </div>
- <!--列表样式-->
-    <div class="sort_Ads_list">
-      <table class="table table-striped table-bordered table-hover" id="sample-table">
-    		<thead>
-    		 <tr>
-    				<th width="25"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
-    				<th width="50px">ID</th>
-    				<th width="100">分类</th>
-    				<th width="240px">图片</th>
-    				<th width="150px">尺寸（大小）</th>
-    				<th width="200px">标题</th>
-    				<th width="200">描述</th>
-    				<th width="70">状态</th>
-    				<th width="300">操作</th>
-    			</tr>
-    		</thead>
-      	<tbody>
-            <tr>
-             <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-             <td>1</td>
-             <td>图片</td>
-             <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="products/ad.jpg"  width="100%" height="100%"/></a></span></td>
-             <td>1890x1080</td>
-             <td>标题1</td>
-             <td>描述1</td>
-             <td class="td-status"><span class="label label-success radius">显示</span></td>
-            <td class="td-manage">
-              <a title="停用" href="javascript:;"  onClick="member_stop(this,'10001')"  class="btn btn-xs btn-success"><i class="fa fa-check  bigger-120"></i></a>
-              <!-- <a title="编辑" href="javascript:;"  onclick="member_edit('编辑','member-add.html','4','','510')" class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120"></i></a> -->
-              <a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>
-              <a title="上移" href="javascript:;"  onclick="member_up(this,'1')" class="btn btn-xs btn-green" ><i class="fa fa-arrow-up  bigger-120"></i></a>
-              <a title="下移" href="javascript:;"  onclick="member_down(this,'1')" class="btn btn-xs btn-lan" ><i class="fa fa-arrow-down  bigger-120"></i></a>
-             </td>
-            </tr>
-            <tr>
-             <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-             <td>2</td>
-             <td>图片</td>
-             <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="products/ad1.jpg"  width="100%" height="100%"/></a></span></td>
-             <td>1890x1080</td>
-             <td>标题2</td>
-             <td>描述2</td>
-             <td class="td-status"><span class="label label-success radius">显示</span></td>
-            <td class="td-manage">
-              <a title="停用" href="javascript:;"  onClick="member_stop(this,'10001')"  class="btn btn-xs btn-success"><i class="fa fa-check  bigger-120"></i></a>
-              <!-- <a title="编辑" href="javascript:;"  onclick="member_edit('编辑','member-add.html','4','','510')" class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120"></i></a> -->
-              <a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>
-              <a title="上移" href="javascript:;"  onclick="member_up(this,'1')" class="btn btn-xs btn-green" ><i class="fa fa-arrow-up  bigger-120"></i></a>
-              <a title="下移" href="javascript:;"  onclick="member_down(this,'1')" class="btn btn-xs btn-lan" ><i class="fa fa-arrow-down  bigger-120"></i></a>
-             </td>
-            </tr>
-             <tr>
-             <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-             <td>2</td>
-             <td>图片</td>
-             <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="products/p_42.jpg"  width="100%" height="100%"/></a></span></td>
-             <td>1890x1080</td>
-             <td>标题3</td>
-             <td>描述3</td>
-             <td class="td-status"><span class="label label-success radius">显示</span></td>
-            <td class="td-manage">
-              <a title="停用" href="javascript:;"  onClick="member_stop(this,'10001')"  class="btn btn-xs btn-success"><i class="fa fa-check  bigger-120"></i></a>
-              <!-- <a title="编辑" href="javascript:;"  onclick="member_edit('编辑','member-add.html','4','','510')" class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120"></i></a> -->
-              <a title="删除" href="javascript:;"  onclick="member_del(this,'1')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>
-              <a title="上移" href="javascript:;"  onclick="member_up(this,'1')" class="btn btn-xs btn-green" ><i class="fa fa-arrow-up  bigger-120"></i></a>
-              <a title="下移" href="javascript:;"  onclick="member_down(this,'1')" class="btn btn-xs btn-lan" ><i class="fa fa-arrow-down  bigger-120"></i></a>
-             </td>
-            </tr>
-        </tbody>
-      </table>
-     </div>
+            <span class="r_f">共：<b><span id="pageCount">234</span></b>条记录</span>
+        </div>
+        <!--列表样式-->
+        <div class="sort_Ads_list">
+            <table class="table table-striped table-bordered table-hover" id="sample-table">
+                <thead>
+                <tr>
+                    <th width="25"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
+                    <th width="50px">ID</th>
+                    <th width="100">分类</th>
+                    <th width="240px">图片</th>
+                    <th width="150px">尺寸（大小）</th>
+                    <th width="200px">标题</th>
+                    <th width="200">描述</th>
+                    <th width="70">状态</th>
+                    <th width="300">操作</th>
+                </tr>
+                </thead>
+                <tbody id="content">
 
- </div>
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
 </div>
 <!--添加广告样式-->
-<div id="add_ads_style"  style="display:none">
- <div class="add_adverts">
- <ul>
-  <li>
-    <label class="label_name">分类</label>
-    <span class="cont_style">
-    <select class="form-control" id="form-field-select-1">
-      <option value="AL">图片</option>
-      <option value="AK">视频</option>
-    </select></span>
-  </li>
-  <li>
-    <label class="label_name">标题</label><span class="cont_style"><input name="标题" type="text" id="form-field-1" placeholder="标题" class="col-xs-10 col-sm-5" style="width:300px"></span>
-  </li>
-  <li>
-    <label class="label_name">描述</label><span class="cont_style"><input name="描述" type="text" id="form-field-1" placeholder="描述" class="col-xs-10 col-sm-5" style="width:500px"></span>
-  </li>
-  <li>
-    <label class="label_name">图片</label>
-    <span class="cont_style">
-      <div id="cupload-create" style="margin-left:10px;"></div>
-      <p style="color:red;margin-left:10px;">仅支持.jpg;.png;.jpeg格式的图片</p>
-    </span>
-  </li>
- </ul>
- </div>
+<div id="add_ads_style" style="display:none; top:0px;">
+    <div class="add_adverts">
+        <ul>
+            <li style="height:32px">
+                <label class="label_name">分类</label>
+                <span class="cont_style">
+                <select class="form-control" id="image_type">
+                  <option value="1">图片</option>
+                </select></span>
+            </li>
+            <li style="height:32px">
+                <label class="label_name">标题</label>
+                <span class="cont_style">
+                  <input name="标题" type="text" id="image_title" placeholder="标题" class="col-xs-10 col-sm-5" style="width:300px">
+                </span>
+            </li>
+            <li style="height:32px">
+                <label class="label_name">描述</label>
+                <span class="cont_style">
+                  <input name="描述" type="text" id="image_content" placeholder="描述" class="col-xs-10 col-sm-5" style="width:500px">
+                </span>
+            </li>
+            <li id='upPicFrame' style="display:none;">
+                <label class="label_name">图片</label>
+                <div class="cont_style">
+                  <!-- <div id="cupload-create" style="margin-left:10px;"></div>
+                  <p style="color:red;margin-left:10px;">仅支持.jpg;.png;.jpeg格式的图片</p> -->
+                  <form enctype="multipart/form-data">
+                      <input type="hidden" id="imagepath" name="">  <!-- 保存的图片id 用于表单提交 -->
+                      <span id="upload_duixiang">上传</span><!-- 上传按钮 -->
+                      <div class="show"></div> <!-- 输出图片 -->
+                      <!-- <pre id="geoJsonTxt"></pre> -->
+                       <!-- 输出文件的json数据 -->
+                  </form>
+
+                </div>
+            </li>
+            <li id='upVideoFrame' style="display:none">
+                <label class="label_name">视频</label>
+                <div class="cont_style">
+                  <div class="video_box_outside" id="video_box_outside" tabindex="2001">
+                      <div class="video_box">
+                          <div id="video_upload_area">
+                              <div class="video_notice">支持上传大小在1GB以内的视频</div>
+                              <div class="video_textarea_upload" id="video_textarea_upload">
+                                  <div class="video_upload_words">
+                                      <a class="video_upload_btn" id="video_upload">+</a>
+                                      <a class="video_name_box" id="video_name_box" href="javascript:void(0)">
+                                          <img src="images/icon_video.png" style="width:13.5px;height: 9px"/>
+                                          <em id="video_file_name"></em>
+                                          <span class="photo_upload_close" onclick="reupload_video()" href="javascript:void(0);"></span>
+                                      </a>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="layer_point">
+                              <dl id="video_loading" class="point clearfix" style="display: none; padding: 0 0 60px">
+                                  <dt style="" id="loading_bar">
+                                      <span class="loading_bar"><em id="percent" style="width: 27%;"></em></span>
+                                      <span id="percentnum" class="S_txt2 load_num">27%</span>
+                                  </dt>
+                                  <dd>
+                                      <p id="updesc">视频上传中...</p>
+                                      <p class="S_txt2"><label id="uploading_tip">上传速度取决于您的网速，请耐心等待。</label><a href="javascript:void(0);" id="video_upload_cancel" onclick="video_upload_cancel()">取消上传</a>
+                                      </p>
+                                  </dd>
+                              </dl>
+                              <div id="video_success" style="display: none">
+                                  <dl class="point clearfix">
+                                      <dt>
+                                          <span class="W_icon icon_succB"></span>
+                                      </dt>
+                                      <dd>
+                                          <p id="upload_succ">视频上传成功</p>
+                                      </dd>
+                                  </dl>
+                                  <!-- <div class="upload_know">
+                                      <a class="up_btn" href="javascript:void(0);" onclick="fadeout_div('#video_box_outside')">我知道了</a>
+                                  </div> -->
+                              </div>
+                          </div>
+                          <div class="upload_video_area" id="upload_video_area">
+                              <a id="upload_video" class="up_btn up_disabled" href="javascript:void(0);">开始上传</a>
+                          </div>
+                      </div>
+                      <div id="video_iput"></div>
+                  </div>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>
-  <script>
-   /*******添加广告*********/
-   $('#ads_add').on('click', function(){
-  	  layer.open({
-          type: 1,
-          title: '添加屏保',
-  		maxmin: true,
-  		shadeClose: false, //点击遮罩关闭层
-          area : ['800px' , ''],
-          content:$('#add_ads_style'),
-  		btn:['提交','取消'],
-  		yes:function(index,layero){
-  		 var num=0;
-  		 var str="";
-       $(".add_adverts input[type$='text']").each(function(n){
-            if($(this).val()=="")
-            {
+<script>
+    //视频上传插件
+    var uploader_video = new plupload.Uploader({//创建实例的构造方法
+        browse_button: 'video_upload', // 上传按钮
+        url: uploadFile, //远程上传地址
+        flash_swf_url : 'js/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+        silverlight_xap_url : 'js/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        filters: {
+            max_file_size: '1gb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
+            mime_types: [//允许文件上传类型
+                {title: "files", extensions: "mp4"}
+            ]
+        },
+        multi_selection: false, //true:ctrl多文件上传, false 单文件上传
+    });
+    uploader_video.init();
+    reupload_video();
+    //绑定各种事件，并在事件监听函数中做你想做的事
+    uploader_video.bind('FilesAdded',function(uploader,files){
+        //每个事件监听函数都会传入一些很有用的参数，
+        //我们可以利用这些参数提供的信息来做比如更新UI，提示上传进度等操作
+        $("#video_name_box").css({"display": "inline-block"});
+        $("#video_upload_btn").show();
+        $("#video_file_name").text(files[0].name);
+        $("#upload_video").removeClass("disabled");
+        $("#video_iput").attr("file_id", files[0]['id'])
+    });
+    uploader_video.bind('UploadProgress',function(uploader,file){
+        //每个事件监听函数都会传入一些很有用的参数，
+        //我们可以利用这些参数提供的信息来做比如更新UI，提示上传进度等操作
+        $("#video_loading").show();
+        $('#upload_video_area,#video_upload_area').hide();
+        var percent = file.percent;
+        $("#percent").css({"width": percent + "%"});
+        $("#percentnum").text(percent + "%");
+        $("#video_success").hide();
+    });
+    uploader_video.bind('FileUploaded',function(uploader,file, info){
+        //每个事件监听函数都会传入一些很有用的参数，
+        //我们可以利用这些参数提供的信息来做比如更新UI，提示上传进度等操作
+        $("#video_loading").hide();
+        $("#video_success").show();
+        var data = eval("(" + info.response + ")");//解析返回的json数据
+        console.log(data.data);
+        $("#video_iput").html("<input type='hidden' id='video_file' value='" + data.pic + "'/><input type='hidden' id='video_name' value='" + data.data + "'/>");
+    });
+    //最后给"开始上传"按钮注册事件
+    document.getElementById('upload_video').onclick = function(){
+        uploader_video.start(); //调用实例对象的start()方法开始上传文件，当然你也可以在其他地方调用该方法
+    }
 
-  			   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
-                  title: '提示框',
-  				icon:0,
-            });
-  		    num++;
-              return false;
+    function reupload_video() { //重新上传
+        $('#video_upload_btn').show();
+        $('#video_name_box').hide();
+        $("#upload_video_area").show().addClass("disabled");
+        $("#video_text").val("");
+        $("#video_words_num").text(0);
+        $("#video_success").hide();
+        $("#video_file,#video_name").val("");
+    }
+
+    function checkVideoText(value) {
+        var length = value.length;
+        var other = 130 - length;
+        if (length > 0) {
+            $("#video_words_num").html(other);
+        } else {
+            $("#video_words_num").html("<span class='red'>" + other + "</span>");
+        }
+    }
+    function video_upload_cancel() {  //取消上传
+        uploader_video.stop();
+        $("#video_loading,#video_name_box").hide();
+        $("#video_upload_area,#video_upload_btn").show();
+        $("#upload_video_area").show();
+        $("#upload_video").addClass("disabled");
+        $("#video_text").val("");
+        $("#video_words_num").text(0);
+        $("#video_success").hide();
+        $("#video_file,#video_name").val("");
+        var file_id = $("#video_iput").attr("file_id");
+        var obj_file = uploader_video.getFile(file_id);
+        uploader_video.removeFile(obj_file);
+    }
+    function fadeout_div(id) {
+        //reupload_video();
+    }
+
+
+    //select 切换取值
+    $('#image_type').change(function(){
+      var data= $(this).val();
+      if(data == '1'){
+        $("#upPicFrame").show();
+        $("#upVideoFrame").hide();
+      }else if(data == '2'){
+        $("#upPicFrame").hide();
+        $("#upVideoFrame").show();
+      }
+      //alert(data);
+    });
+    $('#image_type').val('1').trigger('change');
+
+</script>
+<script>
+    /*******添加广告*********/
+    $('#ads_add').on('click', function () {
+        layer.open({
+            type: 1,
+            title: '添加屏保',
+            maxmin: true,
+            shadeClose: false, //点击遮罩关闭层
+            area: ['800px', ''],
+            content: $('#add_ads_style'),
+            btn: ['提交', '取消'],
+            yes: function (index, layero) {
+                var num = 0;
+                var str = "";
+                $(".add_adverts input[type$='text']").each(function (n) {
+                    if ($(this).val() == "") {
+                        layer.alert(str += "" + $(this).attr("name") + "不能为空！\r\n", {
+                            title: '提示框',
+                            icon: 0,
+                        });
+                        num++;
+                        return false;
+                    }
+                });
+                if (num > 0) {
+                    return false;
+                } else {
+                    var data = {};
+                    data.bannel_type = bannelPage_pingbao;
+                    data.image_type = $("#image_type").val();
+                    data.title = $("#image_title").val();
+                    data.content = $("#image_content").val();
+                    var image_url = $("#imagepath").val();
+                    var video_url =  $("#video_name").val();
+                    if( video_url == null || video_url == "")
+                    {
+                        data.image_url_str = image_url;
+                    }else{
+                      data.image_url_str = video_url;
+                    }
+                    data.token = localStorage.token;
+                    $.ajax({
+                        type: 'get',
+                        dataType: 'json',
+                        url: bannelAdd,
+                        data: data,
+                        success: function (res) {
+                            if (res.code != 200) {
+                                layer.msg(res.message, {icon: 6, time: 1000});
+                            }else{
+                                layer.alert('添加成功！', {
+                                    title: '提示框',
+                                    icon: 1,
+                                });
+                                layer.close(index);
+                            }
+                        }
+                    });
+                }
             }
-  		 });
-  		  if(num>0){  return false;}
-            else{
-  			  layer.alert('添加成功！',{
-                 title: '提示框',
-  			icon:1,
-  			  });
-  			   layer.close(index);
-  		  }
-  		}
-      });
-  })
+        });
+    })
+</script>
 
-  /*批量删除*/
-  $('#all_del').on('click', function(){
-    layer.confirm('确认要批量删除吗？',function(index){
-      $(obj).parents("tr").remove();
-      layer.msg('已删除!',{icon:1,time:1000});
+<script>
+
+    // 商品图片上传
+    a = $("#upload_duixiang").FraUpload({
+        view        : ".show",      // 视图输出位置
+        url         : uploadFile, // 上传接口
+        fetch       : "img",   // 视图现在只支持img
+        debug       : false,    // 是否开启调试模式
+        /* 外部获得的回调接口 */
+        onLoad: function(e){                    // 选择文件的回调方法
+            console.log("外部: 初始化完成...");
+        },
+        breforePort: function (e) {         // 发送前触发
+            console.log("文件发送之前触发");
+        },
+        successPort: function (e) {         // 发送成功触发
+            console.log("文件发送成功");
+            onload_image()
+        },
+        errorPort: function (e) {       // 发送失败触发
+            console.log("文件发送失败");
+            onload_image()
+        },
+        deletePost: function(e){    // 删除文件触发
+            console.log("删除文件");
+            console.log(e);
+            alert('删除了'+e.filename)
+            onload_image()
+        },
+        sort: function(e){      // 排序触发
+            console.log("排序");
+            onload_image()
+        },
     });
-  })
 
-  </script>
+    // 获取图片上传信息
+    function onload_image(){
+        var res = a.FraUpload.show();
+        var ids = [];
+        for(let k in res){
+            this_val = res[k]
+            if(!empty(res[k]['is_upload']) && !empty(res[k]['ajax'])){
+                ajax_value = res[k]['ajax'];
+                ids.push(ajax_value.data)
+            }
+        }
+        $("#imagepath").val(ids.join(","));
+        $('#geoJsonTxt').html(JsonFormat(res));
+    }
 
-  <script>
-    //默认可能上传3张
-    var cuploadCreate = new Cupload({
-        ele: '#cupload-create',
-        num: 3,
-    });
-    //图片上传插件可选参数
-    // {
-    // ele: "#cupload", // 实例化的DOM对象id,必需,默认为cupload
-    // name: "image", // 图片input的name名,非必需,默认为image
-    // num: 1, // 可上传图片的数量,非必需,默认为1
-    // width: 148, // 预览框的宽,单位为px,非必需,默认为148
-    // height: 148, // 预览框的高,单位为px,非必需,默认为148
-    // minSize: 1024, // 图片大小最小限制,单位为KB,非必需,无默认值
-    // maxSize: 2048, // 图片大小最大限制,单位为KB,非必需,无默认值
-    // limitedSize: 2048, // 图片大小要求,单位为KB,非必需,无默认值
-    // minWidth: 100, // 图片宽度最小限制,单位为px,非必需,无默认值
-    // minHeight: 100, // 图片高度最小限制,单位为px,非必需,无默认值
-    // maxWidth: 2000, // 图片宽度最大限制,单位为px,非必需,无默认值
-    // maxHeight: 2000, // 图片高度最大限制,单位为px,非必需,无默认值
-    // limitedWidth: 800, // 图片宽度要求,单位为px,非必需,无默认值
-    // limitedHeight: 800, // 图片高度要求,单位为px,非必需,无默认值
-    // data: ["1.png", "2.jpg"], // 编辑模式下初始显示的图片路径,非必需,无默认值
-    // }
+    // 将类库返回的json打印到pre中
+    function JsonFormat(json) {
+        if (typeof json != 'string') {
+            json = JSON.stringify(json, undefined, 2);
+        }
+            json = json.replace(/&/g, '&').replace(/</g, '<').replace(/>/g, '>');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                 var cls = 'number';
+                    if (/^"/.test(match)) {
+                            if (/:$/.test(match)) {
+                                cls = 'key';
+                            } else {
+                                cls = 'string';
+                            }
+                    } else if (/true|false/.test(match)) {
+                        cls = 'boolean';
+                    } else if (/null/.test(match)) {
+                        cls = 'null';
+                    }
+                    return '<span class="' + cls + '">' + match + '</span>';
+             });
+    }
+    /**
+     * 判断变量是否为空
+     */
+    function empty(value) {
+        if(value=="" || value==undefined || value==null || value==false || value==[] || value=={}){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+
 
     /*用户-停用*/
-    function member_stop(obj,id){
-    	layer.confirm('确认要停用吗？',function(index){
-    		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="fa fa-close bigger-120"></i></a>');
-    		$(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
-    		$(obj).remove();
-    		layer.msg('已停用!',{icon: 5,time:1000});
-    	});
+    function member_stop(obj, id) {
+        layer.confirm('确认要停用吗？', function (index) {
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs " onClick="member_start(this,id)" href="javascript:;" title="启用"><i class="fa fa-close bigger-120"></i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-defaunt radius">已停用</span>');
+            $(obj).remove();
+            changeStatus(id)
+            layer.msg('已停用!', {icon: 5, time: 1000});
+        });
     }
+
     /*用户-启用*/
-    function member_start(obj,id){
-    	layer.confirm('确认要启用吗？',function(index){
-    		$(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="fa fa-check  bigger-120"></i></a>');
-    		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-    		$(obj).remove();
-    		layer.msg('已启用!',{icon: 6,time:1000});
-    	});
+    function member_start(obj, id) {
+        layer.confirm('确认要启用吗？', function (index) {
+            $(obj).parents("tr").find(".td-manage").prepend('<a style="text-decoration:none" class="btn btn-xs btn-success" onClick="member_stop(this,id)" href="javascript:;" title="停用"><i class="fa fa-check  bigger-120"></i></a>');
+            $(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+            $(obj).remove();
+            changeStatus(id);
+            layer.msg('已启用!', {icon: 6, time: 1000});
+        });
     }
+
+    //修改bannel 显示隐藏状态
+    function changeStatus(id)
+    {
+        var data = {};
+        data.id = id;
+        data.token = localStorage.token;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: bannelUpdateStatus,
+            data: data,
+            success: function (res) {
+                if (res.code != 200) {
+                    layer.msg(res.message, {icon: 6, time: 1000});
+                }
+            }
+        });
+    }
+
     /*产品-编辑*/
-    function member_edit(title,url,id,w,h){
-    	layer_show(title,url,w,h);
+    function member_edit(title, url, id, w, h) {
+        layer_show(title, url, w, h);
     }
 
     /*产品-删除*/
-    function member_del(obj,id){
-    	layer.confirm('确认要删除吗？',function(index){
-    		$(obj).parents("tr").remove();
-    		layer.msg('已删除!',{icon:1,time:1000});
-    	});
+    function member_del(obj, id) {
+      console.log(id);
+        layer.confirm('确认要删除吗？', function (index) {
+            //分页获取数据
+            var data = {};
+            data.token = localStorage.token;
+            data.ids = id;
+            $.ajax({
+                type: 'get',
+                dataType: 'json',
+                url: bannelDel,
+                data: data,
+                success: function (res) {
+                    //成功后刷新这个页面
+                    $(obj).parents("tr").remove();
+                    layer.msg('已删除!', {icon: 1, time: 1000});
+                    location.reload();
+                }
+            });
+        });
     }
 
     /*产品-上移*/
-    function member_up(obj,id){
-    	//
+    function member_up(obj, id) {
+        exchangeSort(id,1)
     }
 
     /*产品-下移*/
-    function member_down(obj,id){
-    	//
+    function member_down(obj, id) {
+        exchangeSort(id,2)
+    }
+
+    /**
+     *   产品上移或者下移
+     */
+    function exchangeSort(id,direction)
+    {
+        //分页获取数据
+        var data = {};
+        data.token = localStorage.token;
+        data.id = id;
+        data.direction = direction;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: bannelExchangePosition,
+            data: data,
+            success: function (res) {
+                //成功后刷新这个页面
+                initPage();
+            }
+        });
     }
 
 
-    function layer_show(title,url,w,h){
-    	if (title == null || title == '') {
-    		title=false;
-    	};
-    	if (url == null || url == '') {
-    		url="404.html";
-    	};
-    	if (w == null || w == '') {
-    		w=800;
-    	};
-    	if (h == null || h == '') {
-    		h=($(window).height() - 50);
-    	};
-    	layer.open({
-    		type: 2,
-    		area: [w+'px', h +'px'],
-    		fix: false, //不固定
-    		maxmin: true,
-    		shade:0.4,
-    		title: title,
-    		content: url
-    	});
+    function layer_show(title, url, w, h) {
+        if (title == null || title == '') {
+            title = false;
+        }
+        ;
+        if (url == null || url == '') {
+            url = "404.html";
+        }
+        ;
+        if (w == null || w == '') {
+            w = 800;
+        }
+        ;
+        if (h == null || h == '') {
+            h = ($(window).height() - 50);
+        }
+        ;
+        layer.open({
+            type: 2,
+            area: [w + 'px', h + 'px'],
+            fix: false, //不固定
+            maxmin: true,
+            shade: 0.4,
+            title: title,
+            content: url
+        });
     }
-    //
-  </script>
+
+
+    initPage();
+
+    //初始化这一页的数据
+    function initPage() {
+        //分页获取数据
+        var data = {};
+        data.token = localStorage.token;
+        data.pageNo = 1;
+        data.pageSize = 99;
+        data.bannelType = bannelPage_pingbao;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: bannelPage,
+            data: data,
+            success: function (res) {
+                var content = initContent(res.data);
+                $('#content').html(content);
+                //分页
+                pageList();
+                //选择所有
+                choiceAllList();
+                //选择单个值
+                choiceSingleList();
+            }
+        });
+    }
+
+    //分页插件
+    function pageList(){
+      var oTable1 = $('#sample-table').dataTable( {
+      "aaSorting": [[ 1, "desc" ]],//默认第几个排序
+      "bStateSave": true,//状态保存
+      "searching" : false,
+      "aoColumnDefs": [
+        //{"bVisible": false, "aTargets": [ 3 ]} //控制列的隐藏显示
+        {"orderable":false,"aTargets":[0,2,3,4,5,6]}// 制定列不参与排序
+      ] } );
+    }
+
+    /*批量删除*/
+    var allNoArr = [];
+    $('#all_del').on('click', function () {
+        layer.confirm('确认要批量删除吗？', function (index) {
+            //$(obj).parents("tr").remove();
+            alert(allNoArr);
+            layer.msg('已删除!', {icon: 1, time: 1000});
+            location.reload();
+        });
+    })
+
+    //多选项选择了所有选择项
+    function choiceAllList(){
+      $('table th input:checkbox').on('click' , function(){
+        var that = this;
+        $(this).closest('table').find('tr > td:first-child input:checkbox')
+        .each(function(){
+          //console.log(this.);
+          var curHtml = $(this).parent('label').parent('td').siblings()[0];
+          $(curHtml).each(function(){
+            var val = $(this).text();
+            //console.log(val);
+            allNoArr.push(val);
+            });
+          this.checked = that.checked;
+          $(this).closest('tr').toggleClass('selected');
+        });
+        var newArr = unique(allNoArr);
+        allNoArr = newArr;
+        //console.log("allNoArr:"+allNoArr);
+      });
+    }
+    //多选项选择了单个选择项
+    function choiceSingleList(){
+      $('#content > tr > td:first-child input:checkbox').on('click' , function(){
+        var that = this;
+        this.checked = that.checked;
+        var dom=$(this);
+        //console.log("curArr:"+allNoArr);
+        //console.log("status:"+dom.is(':checked'));
+        var curHtml = $(this).parent('label').parent('td').siblings()[0];
+        $(curHtml).each(function(){
+            var val = $(this).text();
+            //console.log("cur:"+val);
+            if(dom.is(':checked')){//选中，添加到数组后并去重
+              allNoArr.push(val);
+              var newArr = unique(allNoArr);
+              allNoArr = newArr;
+              console.log("add:"+allNoArr);
+            }else{
+              if(allNoArr.indexOf(val) > -1){ //取消或没选，则查询位置并删除数组中已有数据。
+                //console.log("2:"+allNoArr.indexOf(val));
+                allNoArr.splice(allNoArr.indexOf(val),1)
+                console.log("del:"+allNoArr);
+              }
+            }
+            //
+          });
+      });
+    }
+
+    //数组去重
+    function unique(arr) {
+        var obj = {};
+        return arr.filter(function(item, index, arr){
+            return obj.hasOwnProperty(typeof item + item) ? false : (obj[typeof item + item] = true)
+        })
+    }
+
+    //动态加载数据内容
+    function initContent(data) {
+        var status_btn=new Array();
+        status_btn[1]="btn-success";
+        status_btn[2]="";
+        var status_fa=new Array();
+        status_fa[1]="fa-check";
+        status_fa[2]="fa-close";
+        var status_label=new Array();
+        status_label[1]="label-success";
+        status_label[2]="label-defaunt";
+        var status_click=new Array();
+        status_click[1]="member_stop";
+        status_click[2]="member_start";
+        //定义bannel 状态
+        var BANNEL_STATUS=new Array();
+        BANNEL_STATUS[1]="已启用";
+        BANNEL_STATUS[2]="已停用";
+        //<video src="' + imageUrl+data[i].image_url + '" width="140px" controls="controls"></video>
+        //<img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/>
+        var content = "";
+        for (var i in data) {
+            content += '<tr>\n' +
+                '                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>\n' +
+                '                <td>' + data[i].id + '</td>\n' +
+                '                <td>' + BANNEL_TYPE[data[i].image_type] + '</td>\n' +
+                '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/></a></span></td>\n' +
+                '                <td>' + data[i].image_height + 'x' + data[i].image_width + '</td>\n' +
+                '                <td>' + data[i].title + '</td>\n' +
+                '                <td>' + data[i].content + '</td>\n' +
+                '                <td class="td-status"><span class="label '+status_label[data[i].status]+' radius">' + BANNEL_STATUS[data[i].status] + '</span></td>\n' +
+                '                <td class="td-manage">\n' +
+                '                <a title="停用" href="javascript:;" onClick="'+status_click[data[i].status]+'(this,' + data[i].id + ')"   class="btn btn-xs '+status_btn[data[i].status]+'"><i class="fa '+status_fa[data[i].status]+' bigger-120"></i></a>\n' +
+                '                <a title="删除" href="javascript:;"  onClick="member_del(this,' + data[i].id + ')"  class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>\n' +
+                '                <a title="上移" href="javascript:;"  onClick="member_up(this,' + data[i].id + ')"  class="btn btn-xs btn-green" ><i class="fa fa-arrow-up  bigger-120"></i></a>\n' +
+                '                <a title="下移" href="javascript:;"  onClick="member_down(this,' + data[i].id + ')"  class="btn btn-xs btn-lan" ><i class="fa fa-arrow-down  bigger-120"></i></a>\n' +
+                '                </td>\n' +
+                '</tr>\n';
+        }
+        return content;
+    }
+</script>
