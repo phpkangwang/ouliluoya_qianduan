@@ -11,19 +11,19 @@ var adminLogin = domain + "/user/login";
 var adminUserInfo = domain + "/user/admin-user-info";
 
 //分页获取bannel
-var bannelPage = domain + "/bannel/page";
+var UrlbannelPage = domain + "/bannel/page";
 
 //修改bannel状态
-var bannelUpdateStatus = domain + "/bannel/update-status";
+var UrlbannelUpdateStatus = domain + "/bannel/update-status";
 
 //bannel排序 上移或者下移
-var bannelExchangePosition = domain + "/bannel/exchange-position";
+var UrlbannelExchangePosition = domain + "/bannel/exchange-position";
 
 //添加bannel
-var bannelAdd= domain + "/bannel/add";
+var UrlbannelAdd= domain + "/bannel/add";
 
 //删除bannel
-var bannelDel= domain + "/bannel/del";
+var UrlbannelDel= domain + "/bannel/del";
 
 
 //日志列表
@@ -35,7 +35,8 @@ var userAdd= domain + "/user/add";
 //上传文件
 var uploadFile = domain + "/bannel/upload-file";
 
-
+//获取首页信息
+var home = domain + "/bannel/bannel-type-num";
 
 
 
@@ -54,3 +55,143 @@ var bannelPage_fuwu = 6;
 var BANNEL_TYPE=new Array();
 BANNEL_TYPE[1]="图片";
 BANNEL_TYPE[2]="视频";
+
+//bannel状态样式转换
+var status_btn=new Array();
+status_btn[1]="btn-success";
+status_btn[2]="";
+var status_fa=new Array();
+status_fa[1]="fa-check";
+status_fa[2]="fa-close";
+var status_label=new Array();
+status_label[1]="label-success";
+status_label[2]="label-defaunt";
+var status_click=new Array();
+status_click[1]="member_stop";
+status_click[2]="member_start";
+//定义bannel 状态
+var BANNEL_STATUS=new Array();
+BANNEL_STATUS[1]="已启用";
+BANNEL_STATUS[2]="已停用";
+
+//################################公用方法###################
+
+//动态加载数据内容
+function initContent(data) {
+    var status_btn=new Array();
+    status_btn[1]="btn-success";
+    status_btn[2]="";
+    var status_fa=new Array();
+    status_fa[1]="fa-check";
+    status_fa[2]="fa-close";
+    var status_label=new Array();
+    status_label[1]="label-success";
+    status_label[2]="label-defaunt";
+    var status_click=new Array();
+    status_click[1]="member_stop";
+    status_click[2]="member_start";
+    //定义bannel 状态
+    var BANNEL_STATUS=new Array();
+    BANNEL_STATUS[1]="已启用";
+    BANNEL_STATUS[2]="已停用";
+    //<video src="' + imageUrl+data[i].image_url + '" width="140px" controls="controls"></video>
+    //<img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/>
+    var content = "";
+    for (var i in data) {
+        content += '<tr>\n' +
+            '                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>\n' +
+            '                <td>' + data[i].id + '</td>\n' +
+            '                <td>' + BANNEL_TYPE[data[i].image_type] + '</td>\n';
+        if( data[i].image_type == 1 ){
+            content += '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/></a></span></td>\n';
+        }else{
+            content += '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><video src="' + imageUrl+data[i].image_url + '" width="140px" controls="controls"></video></a></span></td>\n';
+        }
+        content +=
+            '                <td>' + data[i].image_height + 'x' + data[i].image_width + '</td>\n' +
+            '                <td>' + data[i].title + '</td>\n' +
+            '                <td>' + data[i].content + '</td>\n' +
+            '                <td>' + data[i].sort + '</td>\n' +
+            '                <td class="td-status"><span class="label '+status_label[data[i].status]+' radius">' + BANNEL_STATUS[data[i].status] + '</span></td>\n' +
+            '                <td class="td-manage">\n' +
+            '                <a title="停用" href="javascript:;" onClick="'+status_click[data[i].status]+'(this,' + data[i].id + ')"   class="btn btn-xs '+status_btn[data[i].status]+'"><i class="fa '+status_fa[data[i].status]+' bigger-120"></i></a>\n' +
+            '                <a title="删除" href="javascript:;"  onClick="member_del(this,' + data[i].id + ')"  class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>\n' +
+            '                <a title="上移" href="javascript:;"  onClick="member_up(this,' + data[i].id + ')"  class="btn btn-xs btn-green" ><i class="fa fa-arrow-up  bigger-120"></i></a>\n' +
+            '                <a title="下移" href="javascript:;"  onClick="member_down(this,' + data[i].id + ')"  class="btn btn-xs btn-lan" ><i class="fa fa-arrow-down  bigger-120"></i></a>\n' +
+            '                </td>\n' +
+            '</tr>\n';
+    }
+    return content;
+}
+
+//添加bannel
+// function bannelAdd(data){
+//
+// }
+
+//删除bannel
+function bannelDel(ids)
+{
+    var idsStr = "";
+    if($.isArray(ids)){
+        idsStr = ids.join(",");
+    }else{
+        idsStr = ids;
+    }
+    var data = {};
+    data.token = localStorage.token;
+    data.ids = idsStr;
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: UrlbannelDel,
+        data: data,
+        success: function (res) {
+            //成功后刷新这个页面
+            layer.msg('已删除!', {icon: 1, time: 1000});
+            location.reload();
+        }
+    });
+}
+
+
+/**
+ *   产品上移或者下移
+ */
+function exchangeSort(id,direction)
+{
+    //分页获取数据
+    var data = {};
+    data.token = localStorage.token;
+    data.id = id;
+    data.direction = direction;
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: UrlbannelExchangePosition,
+        data: data,
+        success: function (res) {
+            //成功后刷新这个页面
+            initPage();
+        }
+    });
+}
+
+//修改bannel 显示隐藏状态
+function changeStatus(id)
+{
+    var data = {};
+    data.id = id;
+    data.token = localStorage.token;
+    $.ajax({
+        type: 'get',
+        dataType: 'json',
+        url: UrlbannelUpdateStatus,
+        data: data,
+        success: function (res) {
+            if (res.code != 200) {
+                layer.msg(res.message, {icon: 6, time: 1000});
+            }
+        }
+    });
+}

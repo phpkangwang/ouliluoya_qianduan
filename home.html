@@ -23,6 +23,7 @@
 		<!-- <![endif]-->
     <script src="assets/dist/echarts.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
+    <script src="js/myRoute.js"></script>
     <title></title>
 </head>
 <body>
@@ -39,7 +40,7 @@
 														 <i class="icon-th-large"></i>
                           </div>
                           <div class="value">
-                              <h1>10</h1>
+                              <h1><span id="pingbao"></span></h1>
                               <p>屏保</p>
                           </div>
                           </a>
@@ -51,7 +52,7 @@
                               <i class="icon-star-empty"></i>
                           </div>
                           <div class="value">
-                              <h1>5</h1>
+                              <h1><span id="zhuye"></span></h1>
                               <p>主页</p>
                           </div>
                       </section>
@@ -62,7 +63,7 @@
                               <i class="icon-align-justify"></i>
                           </div>
                           <div class="value">
-                              <h1>3</h1>
+                              <h1><span id="louceng"></span></h1>
                               <p>楼层</p>
                           </div>
                       </section>
@@ -73,7 +74,7 @@
                               <i class="icon-gift"></i>
                           </div>
                           <div class="value">
-                              <h1>100</h1>
+                              <h1><span id="pingpai"></span></h1>
                               <p>品牌</p>
                           </div>
                       </section>
@@ -84,7 +85,7 @@
                               <i class="icon-comment-alt"></i>
                           </div>
                           <div class="value">
-                              <h1>10</h1>
+                              <h1><span id="huodong"></span></h1>
                               <p>活动资讯</p>
                           </div>
                       </section>
@@ -95,7 +96,7 @@
                               <i class="icon-heart-empty"></i>
                           </div>
                           <div class="value">
-                              <h1>10</h1>
+                              <h1><span id="fuwu"></span></h1>
                               <p>服务承诺</p>
                           </div>
                       </section>
@@ -107,7 +108,7 @@
                              <i class="icon-group"></i>
                           </div>
                           <div class="value">
-                              <h1>2</h1>
+                              <h1><span id="yonghu"></span></h1>
                               <p>管理</p>
                           </div>
                           </a>
@@ -141,5 +142,33 @@
 			});
  });
 
+    initHome();
+  function initHome()
+  {
+      var data = {};
+      data.token = localStorage.token;
+      $.ajax({
+          type: 'get',
+          dataType: 'json',
+          url: home,
+          data: data,
+          success: function (res) {
+              if (res.code == 200) {
+                  $("#pingbao").text(res.data.bannel[bannelPage_pingbao]);
+                  $("#zhuye").text(res.data.bannel[bannelPage_zhuye]);
+                  $("#louceng").text(res.data.bannel[bannelPage_louceng]);
+                  $("#pingpai").text(res.data.bannel[bannelPage_pingpai]);
+                  $("#huodong").text(res.data.bannel[bannelPage_huodong]);
+                  $("#fuwu").text(res.data.bannel[bannelPage_fuwu]);
+                  $("#yonghu").text(res.data.admin);
+              }else{
+                  layer.alert(res.message, {
+                      title: '提示框',
+                      icon: 1,
+                  });
+              }
+          }
+      });
+  }
 
  </script>
