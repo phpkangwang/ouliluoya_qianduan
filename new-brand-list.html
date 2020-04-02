@@ -151,7 +151,10 @@
             <li style="height:32px">
                 <label class="label_name">楼层</label>
                 <span class="cont_style">
-                  <input name="楼层" type="text" id="image_floor" placeholder="楼层" class="col-xs-10 col-sm-5" style="width:100px">
+<!--                  <input name="楼层" type="text" id="image_floor" placeholder="楼层" class="col-xs-10 col-sm-5" style="width:100px">-->
+                    <select id="image_floor">
+
+                    </select>
               </span>
             </li>
             <li style="height:32px">
@@ -281,7 +284,7 @@
 </body>
 </html>
 <script>
-    var bannelType = bannelPage_louceng;
+    var bannelType = bannelPage_pingpai;
     //视频上传插件
     var uploader_video = new plupload.Uploader({//创建实例的构造方法
         browse_button: 'video_upload', // 上传按钮
@@ -699,6 +702,27 @@
 
     /*******添加广告*********/
     $('#ads_add').on('click', function () {
+        //每次点击的时候获取所有的楼层
+        var data = {};
+        data.pageNo = 1;
+        data.pageSize = 99;
+        data.bannelType = bannelPage_louceng;
+        $.ajax({
+            type: 'get',
+            dataType: 'json',
+            url: UrlbannelPage,
+            data: data,
+            success: function (res) {
+                var data = res.data;
+                var content = "";
+                for (var i in data) {
+                    content += '<option value="'+data[i].title+'">' + data[i].title + '</option>\n';
+                }
+                $("#image_floor").append(content);
+            }
+        });
+
+
         layer.open({
             type: 1,
             title: '添加主页',
@@ -723,19 +747,23 @@
                 if (num > 0) {
                     return false;
                 } else {
+                    var append = {};
+                    append.louceng = $("#image_floor").val();
+                    append.menpaihao = $("#image_number").val();
+                    append.cname = $("#image_cname").val();
+                    append.ename = $("#image_ename").val();
+                    append.shopType = $("#image_type").val();
+                    append.content = $("#image_content").val();
+                    append.logo = $("#imagepath").val();
+                    append.image = $("#imagepath2").val();
+
                     var data = {};
                     data.bannel_type = bannelType;
-                    data.image_type = $("#image_type").val();
-                    data.title = $("#image_title").val();
+                    data.image_type = 2;
+                    data.title = $("#image_floor").val();
                     data.content = $("#image_content").val();
-                    var image_url = $("#imagepath").val();
-                    var video_url =  $("#video_name").val();
-                    if( video_url == null || video_url == "")
-                    {
-                        data.image_url_str = image_url;
-                    }else{
-                        data.image_url_str = video_url;
-                    }
+                    data.image_url_str = "";
+                    data.append = JSON.stringify(append);
                     data.token = localStorage.token;
                     $.ajax({
                         type: 'get',

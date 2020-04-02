@@ -38,6 +38,8 @@ var uploadFile = domain + "/bannel/upload-file";
 //获取首页信息
 var home = domain + "/bannel/bannel-type-num";
 
+//获取一个楼层的所有品牌
+//http://127.0.0.1/ouliluoya_backend/backend/web/bannel/get-louceng-pingpai?title=1F     解析方法同品牌这个页面
 
 
 
@@ -149,7 +151,7 @@ function initContentFloor(data) {
         content += '<tr>\n' +
             '                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>\n' +
             '                <td>' + data[i].id + '</td>\n' +
-            '                <td>' + '1F' + '</td>\n' +
+            '                <td>' + data[i].title + '</td>\n' +
             '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/></a></span></td>\n' +
             '                <td>' + data[i].sort + '</td>\n' +
             '                <td class="td-status"><span class="label '+status_label[data[i].status]+' radius">' + BANNEL_STATUS[data[i].status] + '</span></td>\n' +
@@ -186,17 +188,19 @@ function initContentBrand(data) {
     //<img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/>
     var content = "";
     for (var i in data) {
+        var append = JSON.parse(data[i].append);
+
         content += '<tr>\n' +
             '                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>\n' +
             '                <td>' + data[i].id + '</td>\n' +
-            '                <td>' + '1F' + '</td>\n' +
-            '                <td>' + '101' + '</td>\n' +
-            '                <td>' + '稻田（日本）' + '</td>\n' +
-            '                <td>' + 'miele' + '</td>\n' +
-            '                <td>' + '沙发'+ '</td>\n'+
+            '                <td>' + append['louceng'] + '</td>\n' +
+            '                <td>' + append['menpaihao'] + '</td>\n' +
+            '                <td>' + append['cname'] + '</td>\n' +
+            '                <td>' + append['ename'] + '</td>\n' +
+            '                <td>' + append['shopType']+ '</td>\n'+
             '                <td>' + data[i].content + '</td>\n' +
-            '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/></a></span></td>\n' +
-            '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/></a></span></td>\n' +
+            '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + append['logo'] + '"  width="100%" height="100%"/></a></span></td>\n' +
+            '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + append['image'] + '"  width="100%" height="100%"/></a></span></td>\n' +
             '                <td>' + data[i].sort + '</td>\n' +
             '                <td class="td-status"><span class="label '+status_label[data[i].status]+' radius">' + BANNEL_STATUS[data[i].status] + '</span></td>\n' +
             '                <td class="td-manage">\n' +

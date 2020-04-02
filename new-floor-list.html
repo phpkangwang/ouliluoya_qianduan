@@ -591,22 +591,15 @@
                 } else {
                     var data = {};
                     data.bannel_type = bannelType;
-                    data.image_type = $("#image_type").val();
-                    data.title = $("#image_title").val();
-                    data.content = $("#image_content").val();
-                    var image_url = $("#imagepath").val();
-                    var video_url =  $("#video_name").val();
-                    if( video_url == null || video_url == "")
-                    {
-                        data.image_url_str = image_url;
-                    }else{
-                        data.image_url_str = video_url;
-                    }
+                    data.image_type = 1;
+                    data.title = $("#image_floor").val();
+                    data.content = "";
+                    data.image_url_str = $("#imagepath").val();
                     data.token = localStorage.token;
                     $.ajax({
                         type: 'get',
                         dataType: 'json',
-                        url: UrlbannelAdd,
+                        url: UrlbannelPage,
                         data: data,
                         success: function (res) {
                             if (res.code != 200) {
