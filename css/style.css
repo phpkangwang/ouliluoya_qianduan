@@ -665,7 +665,7 @@ body
 .order_list_style.Widescreen { margin-left:0px;}
 #add_ads_style .add_adverts{ padding:15px;}
 /* #add_ads_style .add_adverts li{ height:32px; line-height:30px; margin:10px 0px;} */
-#add_ads_style .add_adverts li{ margin:10px 0px;}
+#add_ads_style .add_adverts li{ margin:5px 0px;}
 #add_ads_style .add_adverts li .label_name{ width:80px; float:left;text-align:right}
 #add_ads_style .add_adverts li .cont_style{ float:left; width:600px; position:relative;}
 #add_ads_style .add_adverts li .cont_style select.form-control{ width:220px; margin-left:10px}
