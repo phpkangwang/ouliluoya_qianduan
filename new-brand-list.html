@@ -606,7 +606,7 @@
             url: UrlbannelPage,
             data: data,
             success: function (res) {
-                var content = initContentFloor(res.data);
+                var content = initContentBrand(res.data);
                 $('#content').html(content);
                 //分页
                 pageList();
