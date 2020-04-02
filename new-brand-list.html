@@ -76,6 +76,19 @@
             border-radius: 3px;
             cursor: pointer;
          }
+         #upload_duixiang2{
+            display: inline-block;
+            margin-bottom: 8px;
+            margin-left: 10px;
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+            padding: 5px 10px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+            cursor: pointer;
+         }
     </style>
 </head>
 
@@ -84,7 +97,7 @@
     <div class="sort_adsadd_style">
        <div class="border clearfix">
        <span class="l_f">
-        <a href="javascript:;" id="ads_add" title="添加屏保" class="btn btn-warning Order_form"><i class="fa fa-plus"></i> 添加品牌</a>
+        <a href="javascript:;" id="ads_add" title="添加楼层" class="btn btn-warning Order_form"><i class="fa fa-plus"></i> 添加品牌</a>
         <a href="javascript:;" id="all_del" class="btn btn-danger"><i class="fa fa-trash"></i> 批量删除</a>
         <input type='hidden' id='all_del_no' value=''/>
            <!-- <a href="javascript:ovid()" onClick="javascript :history.back(-1);" class="btn btn-info"><i class="fa fa-reply"></i> 返回上一步</a> -->
@@ -98,14 +111,17 @@
                 <tr>
                     <th width="25"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
                     <th width="50px">ID</th>
-                    <th width="100">分类</th>
-                    <th width="240px">图片</th>
-                    <th width="150px">尺寸（大小）</th>
-                    <th width="200px">标题</th>
-                    <th width="200">描述</th>
+                    <th width="50px">楼层</th>
+                    <th width="50px">门牌号</th>
+                    <th width="120px">门店名称</th>
+                    <th width="120px">英文名称</th>
+                    <th width="70">业务类型</th>
+                    <th width="200">简介文字</th>
+                    <th width="70px">logo图片</th>
+                    <th width="100px">门店宣传图片</th>
                     <th width="70">排序</th>
                     <th width="70">状态</th>
-                    <th width="300">操作</th>
+                    <th width="200">操作</th>
                 </tr>
                 </thead>
                 <tbody id="content">
@@ -121,34 +137,69 @@
 <div id="add_ads_style" style="display:none; top:0px;">
     <div class="add_adverts">
         <ul>
-            <li style="height:32px">
+            <!-- 去掉了这条 -->
+            <!-- <li style="height:32px; display:none;">
                 <label class="label_name">分类</label>
                 <span class="cont_style">
                 <select class="form-control" id="image_type">
                   <option value="1">图片</option>
-                  <!-- <option value="2">视频</option> -->
-                </select></span>
+                  <option value="2">视频</option>
+                </select>
+              </span>
+            </li> -->
+
+            <li style="height:32px">
+                <label class="label_name">楼层</label>
+                <span class="cont_style">
+                  <input name="楼层" type="text" id="image_floor" placeholder="楼层" class="col-xs-10 col-sm-5" style="width:100px">
+              </span>
             </li>
             <li style="height:32px">
+                <label class="label_name">门牌号</label>
+                <span class="cont_style">
+                  <input name="门牌号" type="text" id="image_number" placeholder="门牌号" class="col-xs-10 col-sm-5" style="width:100px">
+              </span>
+            </li>
+            <li style="height:32px">
+                <label class="label_name">门店名称</label>
+                <span class="cont_style">
+                  <input name="门店名称" type="text" id="image_cname" placeholder="门店名称" class="col-xs-10 col-sm-5" style="width:200px">
+              </span>
+            </li>
+            <li style="height:32px">
+                <label class="label_name">英文名称</label>
+                <span class="cont_style">
+                  <input name="英文名称" type="text" id="image_ename" placeholder="英文名称" class="col-xs-10 col-sm-5" style="width:200px">
+              </span>
+            </li>
+            <li style="height:32px">
+                <label class="label_name">业务类型</label>
+                <span class="cont_style">
+                  <input name="业务类型" type="text" id="image_type" placeholder="业务类型" class="col-xs-10 col-sm-5" style="width:100px">
+              </span>
+            </li>
+
+            <!-- 去掉了这条 -->
+            <!-- <li style="height:32px;display:none;">
                 <label class="label_name">标题</label>
                 <span class="cont_style">
-                  <input name="标题" type="text" id="image_title" placeholder="标题" class="col-xs-10 col-sm-5" style="width:300px">
+                  <input name="标题" type="text" id="image_title" placeholder="标题" class="col-xs-10 col-sm-5" style="width:500px">
                 </span>
-            </li>
+            </li> -->
+
+
             <li style="height:32px">
-                <label class="label_name">描述</label>
+                <label class="label_name">简介文字</label>
                 <span class="cont_style">
-                  <input name="描述" type="text" id="image_content" placeholder="描述" class="col-xs-10 col-sm-5" style="width:500px">
+                  <input name="简介文字" type="text" id="image_content" placeholder="简介文字" class="col-xs-10 col-sm-5" style="width:580px">
                 </span>
             </li>
-            <li id='upPicFrame' style="display:none;">
-                <label class="label_name">图片</label>
-                <div class="cont_style">
-                  <!-- <div id="cupload-create" style="margin-left:10px;"></div>
-                  <p style="color:red;margin-left:10px;">仅支持.jpg;.png;.jpeg格式的图片</p> -->
+            <li id='upPicFrame'>
+                <label class="label_name">logo图片</label>
+                <div class="cont_style" style="width:250px">
                   <form enctype="multipart/form-data">
                       <input type="hidden" id="imagepath" name="">  <!-- 保存的图片id 用于表单提交 -->
-                      <span id="upload_duixiang">上传</span><!-- 上传按钮 -->
+                      <span id="upload_duixiang">上传logo图片</span><!-- 上传按钮 -->
                       <div class="show"></div> <!-- 输出图片 -->
                       <!-- <pre id="geoJsonTxt"></pre> -->
                        <!-- 输出文件的json数据 -->
@@ -156,6 +207,22 @@
 
                 </div>
             </li>
+
+            <li id='upPicFrame2'>
+                <label class="label_name">门店图片</label>
+                <div class="cont_style" style="width:250px">
+                  <form enctype="multipart/form-data">
+                      <input type="hidden" id="imagepath2" name="">  <!-- 保存的图片id 用于表单提交 -->
+                      <span id="upload_duixiang2">上传门店图片</span><!-- 上传按钮 -->
+                      <div class="show2"></div> <!-- 输出图片 -->
+                      <!-- <pre id="geoJsonTxt"></pre> -->
+                       <!-- 输出文件的json数据 -->
+                  </form>
+
+                </div>
+            </li>
+
+            <!-- 上传视频去掉了 -->
             <li id='upVideoFrame' style="display:none">
                 <label class="label_name">视频</label>
                 <div class="cont_style">
@@ -214,7 +281,7 @@
 </body>
 </html>
 <script>
-    var bannelType = bannelPage_pingpai;
+    var bannelType = bannelPage_louceng;
     //视频上传插件
     var uploader_video = new plupload.Uploader({//创建实例的构造方法
         browse_button: 'video_upload', // 上传按钮
@@ -304,21 +371,21 @@
 
 
     //select 切换取值
-    $('#image_type').change(function(){
-      var data= $(this).val();
-      if(data == '1'){
-        $("#upPicFrame").show();
-        $("#upVideoFrame").hide();
-      }else if(data == '2'){
-        $("#upPicFrame").hide();
-        $("#upVideoFrame").show();
-      }
-      //alert(data);
-    });
-    $('#image_type').val('1').trigger('change');
+    // $('#image_type').change(function(){
+    //   var data= $(this).val();
+    //   if(data == '1'){
+    //     $("#upPicFrame").show();
+    //     $("#upVideoFrame").hide();
+    //   }else if(data == '2'){
+    //     $("#upPicFrame").hide();
+    //     $("#upVideoFrame").show();
+    //   }
+    //   //alert(data);
+    // });
+    // $('#image_type').val('1').trigger('change');
 
 
-    // 商品图片上传
+    // 商品图片上传a
     a = $("#upload_duixiang").FraUpload({
         view        : ".show",      // 视图输出位置
         url         : uploadFile, // 上传接口
@@ -351,7 +418,7 @@
         },
     });
 
-    // 获取图片上传信息
+    // 获取图片上传信息a
     function onload_image(){
         var res = a.FraUpload.show();
         var ids = [];
@@ -364,6 +431,54 @@
         }
         $("#imagepath").val(ids.join(","));
         $('#geoJsonTxt').html(JsonFormat(res));
+    }
+
+    // 商品图片上传b
+    b = $("#upload_duixiang2").FraUpload({
+        view        : ".show2",      // 视图输出位置
+        url         : uploadFile, // 上传接口
+        fetch       : "img",   // 视图现在只支持img
+        debug       : false,    // 是否开启调试模式
+        /* 外部获得的回调接口 */
+        onLoad: function(e){                    // 选择文件的回调方法
+            console.log("外部: 初始化完成...");
+        },
+        breforePort: function (e) {         // 发送前触发
+            console.log("文件发送之前触发");
+        },
+        successPort: function (e) {         // 发送成功触发
+            console.log("文件发送成功");
+            onload_image2()
+        },
+        errorPort: function (e) {       // 发送失败触发
+            console.log("文件发送失败");
+            onload_image2()
+        },
+        deletePost: function(e){    // 删除文件触发
+            console.log("删除文件");
+            console.log(e);
+            alert('删除了'+e.filename)
+            onload_image2()
+        },
+        sort: function(e){      // 排序触发
+            console.log("排序");
+            onload_image2()
+        },
+    });
+
+    // 获取图片上传信息b
+    function onload_image2(){
+        var res = b.FraUpload.show();
+        var ids = [];
+        for(let k in res){
+            this_val = res[k]
+            if(!empty(res[k]['is_upload']) && !empty(res[k]['ajax'])){
+                ajax_value = res[k]['ajax'];
+                ids.push(ajax_value.data)
+            }
+        }
+        $("#imagepath2").val(ids.join(","));
+        $('#geoJsonTxt2').html(JsonFormat(res));
     }
 
     // 将类库返回的json打印到pre中
@@ -491,7 +606,7 @@
             url: UrlbannelPage,
             data: data,
             success: function (res) {
-                var content = initContent(res.data);
+                var content = initContentFloor(res.data);
                 $('#content').html(content);
                 //分页
                 pageList();
@@ -586,7 +701,7 @@
     $('#ads_add').on('click', function () {
         layer.open({
             type: 1,
-            title: '添加屏保',
+            title: '添加主页',
             maxmin: true,
             shadeClose: false, //点击遮罩关闭层
             area: ['800px', ''],
