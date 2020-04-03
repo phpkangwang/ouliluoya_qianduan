@@ -199,8 +199,8 @@ function initContentBrand(data) {
             '                <td>' + append['ename'] + '</td>\n' +
             '                <td>' + append['shopType']+ '</td>\n'+
             '                <td>' + data[i].content + '</td>\n' +
-            '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + append['logo'] + '"  width="100%" height="100%"/></a></span></td>\n' +
-            '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + append['image'] + '"  width="100%" height="100%"/></a></span></td>\n' +
+            '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+append['logo'] + '"  width="100%" height="100%"/></a></span></td>\n' +
+            '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+append['image'] + '"  width="100%" height="100%"/></a></span></td>\n' +
             '                <td>' + data[i].sort + '</td>\n' +
             '                <td class="td-status"><span class="label '+status_label[data[i].status]+' radius">' + BANNEL_STATUS[data[i].status] + '</span></td>\n' +
             '                <td class="td-manage">\n' +
