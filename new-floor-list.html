@@ -131,17 +131,9 @@
             <li style="height:32px">
                 <label class="label_name">楼层</label>
                 <span class="cont_style">
-                    <select class="form-control" id="image_floor" style="width:100px">
-
-                    </select>
-              </span>
-            </li>
-            <!-- <li style="height:32px">
-                <label class="label_name">楼层</label>
-                <span class="cont_style">
                   <input name="楼层" type="text" id="image_floor" placeholder="楼层" class="col-xs-10 col-sm-5" style="width:100px">
               </span>
-            </li> -->
+            </li>
             <li id='upPicFrame'>
                 <label class="label_name">楼层图片</label>
                 <div class="cont_style" style="width:250px">
@@ -607,7 +599,7 @@
                     $.ajax({
                         type: 'get',
                         dataType: 'json',
-                        url: UrlbannelPage,
+                        url: UrlbannelAdd,
                         data: data,
                         success: function (res) {
                             if (res.code != 200) {

@@ -32,8 +32,11 @@ var logPage = domain + "/log/page";
 //添加后台账户
 var userAdd= domain + "/user/add";
 
-//上传文件
+//通用上传文件
 var uploadFile = domain + "/bannel/upload-file";
+
+//上传logo文件
+var uploadFile1 = domain + "/bannel/upload-file1";
 
 //获取首页信息
 var home = domain + "/bannel/bannel-type-num";
@@ -262,7 +265,8 @@ function exchangeSort(id,direction)
         data: data,
         success: function (res) {
             //成功后刷新这个页面
-            initPage();
+            //initPage();
+            location.reload();
         }
     });
 }

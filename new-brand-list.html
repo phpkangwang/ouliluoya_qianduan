@@ -261,6 +261,7 @@
                   <span class="add choose">添加logo图片</span>
                   <div class="add_div">
                     <input type="file" name="" id="choose-file" multiple="multiple" style="opacity: 0;display:none;"/>
+                    <input type="hidden" id="logoimagepath">
                     <!--<input type="file" name="" id="choose-file" />-->
                     <ul class="file-list">
 
@@ -393,18 +394,21 @@
               // formData.append('status', status);
               //console.log(formData);
               $.ajax({
-                  url: './product_add.php',
+                  url: uploadFile1,
                   type: 'post',
                   data: formData,
                   dataType: 'json',
                   processData: false,
                   contentType: false,
                   success: function (data) {
-                      if (data.status == '1') {
-                          layer.msg(data.content, {icon: 6});
-                      } else if (data.status == '2') {
-                          layer.msg(data.content, {icon: 1});
-                      }
+                  //  if( data.code != 200)
+                   $("#logoimagepath").val(data.data);
+
+                      // if (data.status == '1') {
+                      //     layer.msg(data.content, {icon: 6});
+                      // } else if (data.status == '2') {
+                      //     layer.msg(data.content, {icon: 1});
+                      // }
                   }
               })
           }
@@ -745,7 +749,7 @@
                     append.ename = $("#image_ename").val();
                     append.shopType = $("#image_type").val();
                     append.content = $("#image_content").val();
-                    append.logo = $("#imagepath").val();
+                    append.logo = $("#logoimagepath").val();
                     append.image = $("#imagepath").val();
 
                     var data = {};
