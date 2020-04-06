@@ -135,11 +135,11 @@
               </span>
             </li>
             <li id='upPicFrame'>
-                <label class="label_name">logo图片</label>
+                <label class="label_name">楼层图片</label>
                 <div class="cont_style" style="width:250px">
                   <form enctype="multipart/form-data">
                       <input type="hidden" id="imagepath" name="">  <!-- 保存的图片id 用于表单提交 -->
-                      <span id="upload_duixiang">上传logo图片</span><!-- 上传按钮 -->
+                      <span id="upload_duixiang">添加楼层图片</span><!-- 上传按钮 -->
                       <div class="show"></div> <!-- 输出图片 -->
                       <!-- <pre id="geoJsonTxt"></pre> -->
                        <!-- 输出文件的json数据 -->
@@ -567,7 +567,7 @@
     $('#ads_add').on('click', function () {
         layer.open({
             type: 1,
-            title: '添加主页',
+            title: '添加楼层',
             maxmin: true,
             shadeClose: false, //点击遮罩关闭层
             area: ['800px', ''],

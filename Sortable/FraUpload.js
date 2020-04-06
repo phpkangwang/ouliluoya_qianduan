@@ -43,14 +43,14 @@
 
 
         //图片队列
-        this.files_all = {}; 
-        
+        this.files_all = {};
+
         //初始化对象
         this.init = function(){
             this.createHtml();  // 创建组件html
             para.onLoad(this); //初始化完成会掉
         };
-        
+
         /**
          * 功能：初始化html
          * 参数: 无
@@ -74,7 +74,7 @@
             // 初始化html之后绑定按钮的点击事件
             this.addEvent();
         };
-        
+
         /**
          * 功能：判断是否定义
          * 参数: 无
@@ -115,7 +115,7 @@
                 return ($byte / $TB).toFixed(2) + "TB";
             }
         }
-        
+
         /**
          *  获取对象长度
          * @param obj obj 文件队列
@@ -157,7 +157,7 @@
             $(self).bind("click", function(e){
                 self.msg("this click...")
                 input.attr("multiple","multiple");//多选
-                input.click()    
+                input.click()
             });
 
             // input选择完文件则触发该事件
@@ -213,7 +213,7 @@
                                 }
                                 self.upLoad(self.files_all[objKey]);
                             });
-                        }   
+                        }
                     }
                 }
             })
@@ -231,7 +231,7 @@
                         break;
                     }
                 }
-                delete self.files_all[this_id]; 
+                delete self.files_all[this_id];
                 id.remove();
                 para.deletePost(this_file);
 
@@ -240,15 +240,15 @@
             if(para.fetch=="img"){
                 self.imgfetch();
                 var foo = document.getElementById(view_id);
-                Sortable.create(foo, { group: "name" 
+                Sortable.create(foo, { group: "name"
                 , onAdd: function (evt){ //拖拽时候添加有新的节点的时候发生该事件
-                   // console.log('onAdd.foo:', [evt.item, evt.from]); 
+                   // console.log('onAdd.foo:', [evt.item, evt.from]);
                 },
                   onUpdate: function (evt){ //拖拽更新节点位置发生该事件
-                   // console.log('onUpdate.foo:', [evt.item, evt.from]); 
+                   // console.log('onUpdate.foo:', [evt.item, evt.from]);
                 },
                   onRemove: function (evt){ //删除拖拽节点的时候促发该事件
-                   // console.log('onRemove.foo:', [evt.item, evt.from]); 
+                   // console.log('onRemove.foo:', [evt.item, evt.from]);
                 },
                   onStart:function(evt){ //开始拖拽出发该函数
                    // console.log('onStart.foo:', [evt.item, evt.from]);
@@ -304,7 +304,7 @@
          */
         this.upLoad = function (file_type) {
             // 创建一个formData对象
-            // 确认选择的文件是图片      
+            // 确认选择的文件是图片
             var data = new FormData();
             var file_one = file_type['obj'];
             data.append('file', file_one);
@@ -342,7 +342,7 @@
                     delete file_type['is_upload'];
                     file_type['is_upload'] = '1';
                     // console.log(file_type);
-                    
+
                     //如果结果返回给了前台,但是还是找不到DOM对象说明:返回回来,DOM还没有添加进去,这里做个sleep等待 1ms ,3ms ,5ms(用于应对特殊情况)
                     self.setView(file_type,1,'icon-success','上传完成');
                     para.successPort(responseStr);
@@ -432,6 +432,7 @@
         $.fn.FraUpload.show = function (){
 
             var this_val =self.files_all
+            console.log(this_val);
             var all = {};
             for(let k in this_val){
                 all_val = {

@@ -76,19 +76,73 @@
             border-radius: 3px;
             cursor: pointer;
          }
-         #upload_duixiang2{
-            display: inline-block;
-            margin-bottom: 8px;
-            margin-left: 10px;
-            color: #fff;
-            background-color: #337ab7;
-            border-color: #2e6da4;
-            padding: 5px 10px;
-            font-size: 12px;
-            line-height: 1.5;
-            border-radius: 3px;
-            cursor: pointer;
+         /*新*/
+         .iconfont {
+                 font-family: "iconfont" !important;
+                 font-size: 14px;
+                 font-style: normal;
+                 -webkit-font-smoothing: antialiased;
+                 -webkit-text-stroke-width: 0.1px;
+                 -moz-osx-font-smoothing: grayscale;
+             }
+
+             @font-face {
+                 font-family: 'iconfont';  /* project id 987132 */
+                 src: url('//at.alicdn.com/t/font_987132_huga9t6yr1s.eot');
+                 src: url('//at.alicdn.com/t/font_987132_huga9t6yr1s.eot?#iefix') format('embedded-opentype'),
+                 url('//at.alicdn.com/t/font_987132_huga9t6yr1s.woff2') format('woff2'),
+                 url('//at.alicdn.com/t/font_987132_huga9t6yr1s.woff') format('woff'),
+                 url('//at.alicdn.com/t/font_987132_huga9t6yr1s.ttf') format('truetype'),
+                 url('//at.alicdn.com/t/font_987132_huga9t6yr1s.svg#iconfont') format('svg');
+             }
+
+
+         .add_div {
+             width: 250px;
+             height: 150px;
+             border: solid #ccc 1px;
+             margin-left: 10px;
+             padding: 10px 10px 10px 10px;
          }
+
+         .file-list {
+             height: auto;
+             display: none;
+             list-style-type: none;
+         }
+
+         .file-list img {
+             max-width: 70px;
+             vertical-align: middle;
+         }
+
+          .file-item {
+             /* float: left; */
+             border:solid red px;
+             margin:5px 10px;
+         }
+         .add{
+           display: inline-block;
+           margin-bottom: 8px;
+           margin-left: 10px;
+           color: #fff;
+           background-color: #337ab7;
+           border-color: #2e6da4;
+           padding: 5px 10px;
+           font-size: 12px;
+           line-height: 1.5;
+           border-radius: 3px;
+           cursor: pointer;
+         }
+         .file-del {
+                 float: right;
+                 margin-top: -9px;
+                 margin-left: -2px;
+                 cursor: pointer;
+                 font-size: 12px;
+                 z-index: 100;
+                 position: absolute;
+             }
     </style>
 </head>
 
@@ -97,7 +151,7 @@
     <div class="sort_adsadd_style">
        <div class="border clearfix">
        <span class="l_f">
-        <a href="javascript:;" id="ads_add" title="添加楼层" class="btn btn-warning Order_form"><i class="fa fa-plus"></i> 添加品牌</a>
+        <a href="javascript:;" id="ads_add" title="添加品牌" class="btn btn-warning Order_form"><i class="fa fa-plus"></i> 添加品牌</a>
         <a href="javascript:;" id="all_del" class="btn btn-danger"><i class="fa fa-trash"></i> 批量删除</a>
         <input type='hidden' id='all_del_no' value=''/>
            <!-- <a href="javascript:ovid()" onClick="javascript :history.back(-1);" class="btn btn-info"><i class="fa fa-reply"></i> 返回上一步</a> -->
@@ -137,22 +191,11 @@
 <div id="add_ads_style" style="display:none; top:0px;">
     <div class="add_adverts">
         <ul>
-            <!-- 去掉了这条 -->
-            <!-- <li style="height:32px; display:none;">
-                <label class="label_name">分类</label>
-                <span class="cont_style">
-                <select class="form-control" id="image_type">
-                  <option value="1">图片</option>
-                  <option value="2">视频</option>
-                </select>
-              </span>
-            </li> -->
-
             <li style="height:32px">
                 <label class="label_name">楼层</label>
                 <span class="cont_style">
-<!--                  <input name="楼层" type="text" id="image_floor" placeholder="楼层" class="col-xs-10 col-sm-5" style="width:100px">-->
-                    <select id="image_floor">
+<!--                <input name="楼层" type="text" id="image_floor" placeholder="楼层" class="col-xs-10 col-sm-5" style="width:100px">-->
+                    <select class="form-control" id="image_floor" style="width:100px">
 
                     </select>
               </span>
@@ -197,87 +240,51 @@
                   <input name="简介文字" type="text" id="image_content" placeholder="简介文字" class="col-xs-10 col-sm-5" style="width:580px">
                 </span>
             </li>
-            <li id='upPicFrame'>
+
+            <!-- logo上传 -->
+            <!-- <li style="display:none;">
                 <label class="label_name">logo图片</label>
                 <div class="cont_style" style="width:250px">
                   <form enctype="multipart/form-data">
-                      <input type="hidden" id="imagepath" name="">  <!-- 保存的图片id 用于表单提交 -->
-                      <span id="upload_duixiang">上传logo图片</span><!-- 上传按钮 -->
-                      <div class="show"></div> <!-- 输出图片 -->
-                      <!-- <pre id="geoJsonTxt"></pre> -->
-                       <!-- 输出文件的json数据 -->
-                  </form>
+                      <input type="hidden" id="imagepath" name="name">
+                      <span id="upload_duixiang">上传logo图片</span>
+                      <div class="show"></div>
 
+                  </form>
+                </div>
+            </li> -->
+
+            <!-- logo上传 -->
+            <li>
+                <label class="label_name">logo图片</label>
+                <div class="cont_style" style="width:250px">
+                  <span class="add choose">添加logo图片</span>
+                  <div class="add_div">
+                    <input type="file" name="" id="choose-file" multiple="multiple" style="opacity: 0;display:none;"/>
+                    <!--<input type="file" name="" id="choose-file" />-->
+                    <ul class="file-list">
+
+                    </ul>
+                    <button style="cursor: pointer;margin-left: 10px;" href="javascript:;" id="upload">上传</button>
+                  </div>
                 </div>
             </li>
 
-            <li id='upPicFrame2'>
+            <!-- 门店上传 -->
+            <li>
                 <label class="label_name">门店图片</label>
                 <div class="cont_style" style="width:250px">
                   <form enctype="multipart/form-data">
-                      <input type="hidden" id="imagepath2" name="">  <!-- 保存的图片id 用于表单提交 -->
-                      <span id="upload_duixiang2">上传门店图片</span><!-- 上传按钮 -->
-                      <div class="show2"></div> <!-- 输出图片 -->
-                      <!-- <pre id="geoJsonTxt"></pre> -->
-                       <!-- 输出文件的json数据 -->
+                      <input type="hidden" id="imagepath"> <!-- 保存的图片id 用于表单提交 -->
+                        <span id="upload_duixiang">添加门店图片</span> <!-- 上传按钮 -->
+                        <div class="show"></div> <!-- 输出图片 -->
+                        <!-- <pre id="geoJsonTxt"></pre> -->
+                        <!-- 输出文件的json数据 -->
                   </form>
-
                 </div>
             </li>
 
             <!-- 上传视频去掉了 -->
-            <li id='upVideoFrame' style="display:none">
-                <label class="label_name">视频</label>
-                <div class="cont_style">
-                  <div class="video_box_outside" id="video_box_outside" tabindex="2001">
-                      <div class="video_box">
-                          <div id="video_upload_area">
-                              <div class="video_notice">支持上传大小在1GB以内的视频</div>
-                              <div class="video_textarea_upload" id="video_textarea_upload">
-                                  <div class="video_upload_words">
-                                      <a class="video_upload_btn" id="video_upload">+</a>
-                                      <a class="video_name_box" id="video_name_box" href="javascript:void(0)">
-                                          <img src="images/icon_video.png" style="width:13.5px;height: 9px"/>
-                                          <em id="video_file_name"></em>
-                                          <span class="photo_upload_close" onclick="reupload_video()" href="javascript:void(0);"></span>
-                                      </a>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="layer_point">
-                              <dl id="video_loading" class="point clearfix" style="display: none; padding: 0 0 60px">
-                                  <dt style="" id="loading_bar">
-                                      <span class="loading_bar"><em id="percent" style="width: 27%;"></em></span>
-                                      <span id="percentnum" class="S_txt2 load_num">27%</span>
-                                  </dt>
-                                  <dd>
-                                      <p id="updesc">视频上传中...</p>
-                                      <p class="S_txt2"><label id="uploading_tip">上传速度取决于您的网速，请耐心等待。</label><a href="javascript:void(0);" id="video_upload_cancel" onclick="video_upload_cancel()">取消上传</a>
-                                      </p>
-                                  </dd>
-                              </dl>
-                              <div id="video_success" style="display: none">
-                                  <dl class="point clearfix">
-                                      <dt>
-                                          <span class="W_icon icon_succB"></span>
-                                      </dt>
-                                      <dd>
-                                          <p id="upload_succ">视频上传成功</p>
-                                      </dd>
-                                  </dl>
-                                  <!-- <div class="upload_know">
-                                      <a class="up_btn" href="javascript:void(0);" onclick="fadeout_div('#video_box_outside')">我知道了</a>
-                                  </div> -->
-                              </div>
-                          </div>
-                          <div class="upload_video_area" id="upload_video_area">
-                              <a id="upload_video" class="up_btn up_disabled" href="javascript:void(0);">开始上传</a>
-                          </div>
-                      </div>
-                      <div id="video_iput"></div>
-                  </div>
-                </div>
-            </li>
         </ul>
     </div>
 </div>
@@ -285,92 +292,124 @@
 </html>
 <script>
     var bannelType = bannelPage_pingpai;
-    //视频上传插件
-    var uploader_video = new plupload.Uploader({//创建实例的构造方法
-        browse_button: 'video_upload', // 上传按钮
-        url: uploadFile, //远程上传地址
-        flash_swf_url : 'js/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-        silverlight_xap_url : 'js/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-        filters: {
-            max_file_size: '1gb', //最大上传文件大小（格式100b, 10kb, 10mb, 1gb）
-            mime_types: [//允许文件上传类型
-                {title: "files", extensions: "mp4"}
-            ]
-        },
-        multi_selection: false, //true:ctrl多文件上传, false 单文件上传
-    });
-    uploader_video.init();
-    reupload_video();
-    //绑定各种事件，并在事件监听函数中做你想做的事
-    uploader_video.bind('FilesAdded',function(uploader,files){
-        //每个事件监听函数都会传入一些很有用的参数，
-        //我们可以利用这些参数提供的信息来做比如更新UI，提示上传进度等操作
-        $("#video_name_box").css({"display": "inline-block"});
-        $("#video_upload_btn").show();
-        $("#video_file_name").text(files[0].name);
-        $("#upload_video").removeClass("disabled");
-        $("#video_iput").attr("file_id", files[0]['id'])
-    });
-    uploader_video.bind('UploadProgress',function(uploader,file){
-        //每个事件监听函数都会传入一些很有用的参数，
-        //我们可以利用这些参数提供的信息来做比如更新UI，提示上传进度等操作
-        $("#video_loading").show();
-        $('#upload_video_area,#video_upload_area').hide();
-        var percent = file.percent;
-        $("#percent").css({"width": percent + "%"});
-        $("#percentnum").text(percent + "%");
-        $("#video_success").hide();
-    });
-    uploader_video.bind('FileUploaded',function(uploader,file, info){
-        //每个事件监听函数都会传入一些很有用的参数，
-        //我们可以利用这些参数提供的信息来做比如更新UI，提示上传进度等操作
-        $("#video_loading").hide();
-        $("#video_success").show();
-        var data = eval("(" + info.response + ")");//解析返回的json数据
-        console.log(data.data);
-        $("#video_iput").html("<input type='hidden' id='video_file' value='" + data.pic + "'/><input type='hidden' id='video_name' value='" + data.data + "'/>");
-    });
-    //最后给"开始上传"按钮注册事件
-    document.getElementById('upload_video').onclick = function(){
-        uploader_video.start(); //调用实例对象的start()方法开始上传文件，当然你也可以在其他地方调用该方法
-    }
+    ////////////////////////////////////////////////logo上传//////////////////////////////////////////////
+    $(function () {
+      $('.choose').click(function(){
+          $('#choose-file').click();
+      })
+      //声明变量
+      var $button = $('#upload'),
+          //选择文件按钮
+          $file = $("#choose-file"),
+          //回显的列表
+          $list = $('.file-list'),
+          //选择要上传的所有文件
+          fileList = [];
+      //当前选择上传的文件
+      var curFile;
+      // 选择按钮change事件，实例化fileReader,调它的readAsDataURL并把原生File对象传给它，
+      // 监听它的onload事件，load完读取的结果就在它的result属性里了。它是一个base64格式的，可直接赋值给一个img的src.
+      $file.on('change', function (e) {
+          //上传过图片后再次上传时限值数量
+          var numold = $('.file-item').length;
+          if(numold >= 1){
+              layer.alert('最多上传1张图片');
+              return;
+          }
+          //限制单次批量上传的数量
+          var num = e.target.files.length;
+          var numall = numold + num;
+          if(num >1 ){
+             layer.alert('最多上传1张图片');
+             return;
+          }else if(numall > 1){
+              layer.alert('最多上传1张图片');
+              return;
+          }
+          //原生的文件对象，相当于$file.get(0).files;//files[0]为第一张图片的信息;
+          curFile = this.files;
+          //curFile = $file.get(0).files;
+          console.log(curFile);
+          //将FileList对象变成数组
+          fileList = fileList.concat(Array.from(curFile));
+          //console.log(fileList);
+          for (var i = 0, len = curFile.length; i < len; i++) {
+              reviewFile(curFile[i])
+          }
+          $('.file-list').fadeIn(2500);
+      })
 
-    function reupload_video() { //重新上传
-        $('#video_upload_btn').show();
-        $('#video_name_box').hide();
-        $("#upload_video_area").show().addClass("disabled");
-        $("#video_text").val("");
-        $("#video_words_num").text(0);
-        $("#video_success").hide();
-        $("#video_file,#video_name").val("");
-    }
 
-    function checkVideoText(value) {
-        var length = value.length;
-        var other = 130 - length;
-        if (length > 0) {
-            $("#video_words_num").html(other);
-        } else {
-            $("#video_words_num").html("<span class='red'>" + other + "</span>");
-        }
-    }
-    function video_upload_cancel() {  //取消上传
-        uploader_video.stop();
-        $("#video_loading,#video_name_box").hide();
-        $("#video_upload_area,#video_upload_btn").show();
-        $("#upload_video_area").show();
-        $("#upload_video").addClass("disabled");
-        $("#video_text").val("");
-        $("#video_words_num").text(0);
-        $("#video_success").hide();
-        $("#video_file,#video_name").val("");
-        var file_id = $("#video_iput").attr("file_id");
-        var obj_file = uploader_video.getFile(file_id);
-        uploader_video.removeFile(obj_file);
-    }
-    function fadeout_div(id) {
-        //reupload_video();
-    }
+      function reviewFile(file) {
+          //实例化fileReader,
+          var fd = new FileReader();
+          //获取当前选择文件的类型
+          var fileType = file.type;
+          //调它的readAsDataURL并把原生File对象传给它，
+          fd.readAsDataURL(file);//base64
+          //监听它的onload事件，load完读取的结果就在它的result属性里了
+          fd.onload = function () {
+              if (/^image\/[jpeg|png|jpg|gif]/.test(fileType)) {
+                  $list.append('<li class="file-item"><img src="' + this.result + '" alt="" height="70"><span class="file-del"><i class="iconfont ">&#xe636;</i></span></li>').children(':last').hide().fadeIn(2500);
+              } else {
+                  $list.append('<li class="file-item"><span class="file-name">' + file.name + '</span><span class="file-del"><i class="iconfont ">&#xe636;</i></span></li>')
+              }
+
+          }
+      }
+      //点击删除按钮事件：
+      $(".file-list").on('click', '.file-del', function () {
+          let $parent = $(this).parent();
+          console.log($parent);
+          let index = $parent.index();
+          fileList.splice(index, 1);
+          $parent.fadeOut(850, function () {
+              $parent.remove()
+          });
+          var filess = document.getElementById('choose-file');
+          filess.value = '';
+      });
+      //点击上传按钮事件：
+      $button.on('click', function () {
+          var name = $('#name').val();
+          if (name == '') {
+              layer.msg('请输入名称');
+              return;
+          }
+           if(fileList.length > 1){
+                  layer.alert('最多允许上传6张图片');
+                  return;
+          } else {
+              var formData = new FormData();
+              for (var i = 0, len = fileList.length; i < len; i++) {
+                  //console.log(fileList[i]);
+                  formData.append('upfile[]', fileList[i]);
+              }
+              formData.append('name', name);
+              // formData.append('catgory', catgory);
+              // formData.append('price', price);
+              // formData.append('desc', desc);
+              // formData.append('stock', stock);
+              // formData.append('status', status);
+              //console.log(formData);
+              $.ajax({
+                  url: './product_add.php',
+                  type: 'post',
+                  data: formData,
+                  dataType: 'json',
+                  processData: false,
+                  contentType: false,
+                  success: function (data) {
+                      if (data.status == '1') {
+                          layer.msg(data.content, {icon: 6});
+                      } else if (data.status == '2') {
+                          layer.msg(data.content, {icon: 1});
+                      }
+                  }
+              })
+          }
+      })
+    })
 
 
     //select 切换取值
@@ -386,7 +425,6 @@
     //   //alert(data);
     // });
     // $('#image_type').val('1').trigger('change');
-
 
     // 商品图片上传a
     a = $("#upload_duixiang").FraUpload({
@@ -436,53 +474,6 @@
         $('#geoJsonTxt').html(JsonFormat(res));
     }
 
-    // 商品图片上传b
-    b = $("#upload_duixiang2").FraUpload({
-        view        : ".show2",      // 视图输出位置
-        url         : uploadFile, // 上传接口
-        fetch       : "img",   // 视图现在只支持img
-        debug       : false,    // 是否开启调试模式
-        /* 外部获得的回调接口 */
-        onLoad: function(e){                    // 选择文件的回调方法
-            console.log("外部: 初始化完成...");
-        },
-        breforePort: function (e) {         // 发送前触发
-            console.log("文件发送之前触发");
-        },
-        successPort: function (e) {         // 发送成功触发
-            console.log("文件发送成功");
-            onload_image2()
-        },
-        errorPort: function (e) {       // 发送失败触发
-            console.log("文件发送失败");
-            onload_image2()
-        },
-        deletePost: function(e){    // 删除文件触发
-            console.log("删除文件");
-            console.log(e);
-            alert('删除了'+e.filename)
-            onload_image2()
-        },
-        sort: function(e){      // 排序触发
-            console.log("排序");
-            onload_image2()
-        },
-    });
-
-    // 获取图片上传信息b
-    function onload_image2(){
-        var res = b.FraUpload.show();
-        var ids = [];
-        for(let k in res){
-            this_val = res[k]
-            if(!empty(res[k]['is_upload']) && !empty(res[k]['ajax'])){
-                ajax_value = res[k]['ajax'];
-                ids.push(ajax_value.data)
-            }
-        }
-        $("#imagepath2").val(ids.join(","));
-        $('#geoJsonTxt2').html(JsonFormat(res));
-    }
 
     // 将类库返回的json打印到pre中
     function JsonFormat(json) {
@@ -725,7 +716,7 @@
 
         layer.open({
             type: 1,
-            title: '添加主页',
+            title: '添加品牌',
             maxmin: true,
             shadeClose: false, //点击遮罩关闭层
             area: ['800px', ''],
@@ -755,7 +746,7 @@
                     append.shopType = $("#image_type").val();
                     append.content = $("#image_content").val();
                     append.logo = $("#imagepath").val();
-                    append.image = $("#imagepath2").val();
+                    append.image = $("#imagepath").val();
 
                     var data = {};
                     data.bannel_type = bannelType;
