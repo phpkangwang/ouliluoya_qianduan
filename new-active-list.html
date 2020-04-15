@@ -625,6 +625,12 @@
                     data.content = $("#image_content").val();
                     var image_url = $("#imagepath").val();
                     var video_url =  $("#video_name").val();
+
+                    var append = {};
+                    append.active_type = $("#active_type").val();
+
+                    data.append = JSON.stringify(append);
+
                     if( video_url == null || video_url == "")
                     {
                         data.image_url_str = image_url;
