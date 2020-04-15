@@ -200,7 +200,7 @@ function initContentBrand(data) {
             '                <td>' + append['menpaihao'] + '</td>\n' +
             '                <td>' + append['cname'] + '</td>\n' +
             '                <td>' + append['ename'] + '</td>\n' +
-            '                <td>' + append['shopType']+ '</td>\n'+
+            '                <td>' + append['brand_type']+ '</td>\n'+
             '                <td>' + data[i].content + '</td>\n' +
             '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+append['logo'] + '"  width="100%" height="100%"/></a></span></td>\n' +
             '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+append['image'] + '"  width="100%" height="100%"/></a></span></td>\n' +
@@ -239,11 +239,12 @@ function initContentActive(data) {
     //<img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/>
     var content = "";
     for (var i in data) {
+        var append = JSON.parse(data[i].append);
         content += '<tr>\n' +
             '                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>\n' +
             '                <td>' + data[i].id + '</td>\n' +
             '                <td>' + BANNEL_TYPE[data[i].image_type] + '</td>\n'+
-            '                <td>' + data[i].active_type + '</td>\n';
+            '                <td>' + append['active_type'] + '</td>\n';
         if( data[i].image_type == 1 ){
             content += '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/></a></span></td>\n';
         }else{
