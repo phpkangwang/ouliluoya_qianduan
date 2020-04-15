@@ -166,11 +166,11 @@
                     <th width="25"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
                     <th width="50px">ID</th>
                     <th width="50px">楼层</th>
-                    <th width="50px">门牌号</th>
+                    <th width="100px">门牌号</th>
                     <th width="120px">门店名称</th>
                     <th width="120px">英文名称</th>
-                    <th width="70">业务类型</th>
-                    <th width="200">简介文字</th>
+                    <th width="100">品牌分类</th>
+                    <th width="150">简介文字</th>
                     <th width="70px">logo图片</th>
                     <th width="100px">门店宣传图片</th>
                     <th width="70">排序</th>
@@ -218,11 +218,18 @@
                   <input name="英文名称" type="text" id="image_ename" placeholder="英文名称" class="col-xs-10 col-sm-5" style="width:200px">
               </span>
             </li>
-            <li style="height:32px">
+            <!-- <li style="height:32px; display:none;" >
                 <label class="label_name">业务类型</label>
                 <span class="cont_style">
                   <input name="业务类型" type="text" id="image_type" placeholder="业务类型" class="col-xs-10 col-sm-5" style="width:200px">
-              </span>
+                </span>
+            </li> -->
+            <li style="height:32px">
+                <label class="label_name">品牌分类</label>
+                <span class="cont_style">
+                  <label style="margin-left:12px;"><input type="checkbox" name="brandtype" value="jiaju" checked="checked"/> 家具</label>
+                  <label><input type="checkbox" name="brandtype" value="jiancai" checked="checked"/> 建材</label>
+                </span>
             </li>
 
             <!-- 去掉了这条 -->
@@ -416,19 +423,6 @@
     })
 
 
-    //select 切换取值
-    // $('#image_type').change(function(){
-    //   var data= $(this).val();
-    //   if(data == '1'){
-    //     $("#upPicFrame").show();
-    //     $("#upVideoFrame").hide();
-    //   }else if(data == '2'){
-    //     $("#upPicFrame").hide();
-    //     $("#upVideoFrame").show();
-    //   }
-    //   //alert(data);
-    // });
-    // $('#image_type').val('1').trigger('change');
 
     // 商品图片上传a
     a = $("#upload_duixiang").FraUpload({
@@ -697,6 +691,21 @@
         })
     }
 
+
+    //取checked值
+    function getChecked(){
+      var obj = document.getElementsByName("brandtype");
+      var check_val = [];
+      for(k in obj){
+        if(obj[k].checked){
+          check_val.push(obj[k].value)
+        }
+      }
+      return check_val;
+      //console.log(check_val);
+      //
+    }
+
     /*******添加广告*********/
     $('#ads_add').on('click', function () {
         //每次点击的时候获取所有的楼层
@@ -749,7 +758,7 @@
                     append.menpaihao = $("#image_number").val();
                     append.cname = $("#image_cname").val();
                     append.ename = $("#image_ename").val();
-                    append.shopType = $("#image_type").val();
+                    // append.shopType = $("#image_type").val();
                     append.content = $("#image_content").val();
                     append.logo = $("#logoimagepath").val();
                     append.image = $("#imagepath").val();

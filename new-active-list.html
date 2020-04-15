@@ -99,10 +99,11 @@
                     <th width="25"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
                     <th width="50px">ID</th>
                     <th width="100">分类</th>
+                    <th width="100">活动类型</th>
                     <th width="240px">图片</th>
                     <th width="150px">尺寸（大小）</th>
-                    <th width="200px">标题</th>
-                    <th width="200">描述</th>
+                    <th width="200px">活动标题</th>
+                    <th width="200">活动描述</th>
                     <th width="70">排序</th>
                     <th width="70">状态</th>
                     <th width="300">操作</th>
@@ -129,16 +130,22 @@
                   <!-- <option value="2">视频</option> -->
                 </select></span>
             </li>
-            <li style="height:32px">
-                <label class="label_name">标题</label>
+            <li style="height:32px;" >
+                <label class="label_name">活动类型</label>
                 <span class="cont_style">
-                  <input name="标题" type="text" id="image_title" placeholder="标题" class="col-xs-10 col-sm-5" style="width:300px">
+                  <input name="活动类型" type="text" id="active_type" placeholder="活动类型" class="col-xs-10 col-sm-5" style="width:300px">
                 </span>
             </li>
             <li style="height:32px">
-                <label class="label_name">描述</label>
+                <label class="label_name">活动标题</label>
                 <span class="cont_style">
-                  <input name="描述" type="text" id="image_content" placeholder="描述" class="col-xs-10 col-sm-5" style="width:500px">
+                  <input name="活动标题" type="text" id="image_title" placeholder="活动标题" class="col-xs-10 col-sm-5" style="width:300px">
+                </span>
+            </li>
+            <li style="height:32px">
+                <label class="label_name">活动描述</label>
+                <span class="cont_style">
+                  <input name="活动描述" type="text" id="image_content" placeholder="活动描述" class="col-xs-10 col-sm-5" style="width:500px">
                 </span>
             </li>
             <li id='upPicFrame' style="display:none;">
@@ -491,7 +498,7 @@
             url: UrlbannelPage,
             data: data,
             success: function (res) {
-                var content = initContent(res.data);
+                var content = initContentActive(res.data);
                 $('#content').html(content);
                 //分页
                 pageList();
@@ -613,6 +620,7 @@
                     var data = {};
                     data.bannel_type = bannelType;
                     data.image_type = $("#image_type").val();
+                    data.image_type = $("#active_type").val();
                     data.title = $("#image_title").val();
                     data.content = $("#image_content").val();
                     var image_url = $("#imagepath").val();

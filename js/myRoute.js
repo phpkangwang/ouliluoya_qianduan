@@ -217,6 +217,55 @@ function initContentBrand(data) {
     return content;
 }
 
+//active动态加载数据内容
+function initContentActive(data) {
+    var status_btn=new Array();
+    status_btn[1]="btn-success";
+    status_btn[2]="";
+    var status_fa=new Array();
+    status_fa[1]="fa-check";
+    status_fa[2]="fa-close";
+    var status_label=new Array();
+    status_label[1]="label-success";
+    status_label[2]="label-defaunt";
+    var status_click=new Array();
+    status_click[1]="member_stop";
+    status_click[2]="member_start";
+    //定义bannel 状态
+    var BANNEL_STATUS=new Array();
+    BANNEL_STATUS[1]="已启用";
+    BANNEL_STATUS[2]="已停用";
+    //<video src="' + imageUrl+data[i].image_url + '" width="140px" controls="controls"></video>
+    //<img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/>
+    var content = "";
+    for (var i in data) {
+        content += '<tr>\n' +
+            '                <td><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>\n' +
+            '                <td>' + data[i].id + '</td>\n' +
+            '                <td>' + BANNEL_TYPE[data[i].image_type] + '</td>\n'+
+            '                <td>' + data[i].active_type + '</td>\n';
+        if( data[i].image_type == 1 ){
+            content += '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><img src="' + imageUrl+data[i].image_url + '"  width="100%" height="100%"/></a></span></td>\n';
+        }else{
+            content += '                <td><span class="ad_img"><a href="#" data-rel="colorbox" data-title="广告图"><video src="' + imageUrl+data[i].image_url + '" width="140px" controls="controls"></video></a></span></td>\n';
+        }
+        content +=
+            '                <td>' + data[i].image_height + 'x' + data[i].image_width + '</td>\n' +
+            '                <td>' + data[i].title + '</td>\n' +
+            '                <td>' + data[i].content + '</td>\n' +
+            '                <td>' + data[i].sort + '</td>\n' +
+            '                <td class="td-status"><span class="label '+status_label[data[i].status]+' radius">' + BANNEL_STATUS[data[i].status] + '</span></td>\n' +
+            '                <td class="td-manage">\n' +
+            '                <a title="停用" href="javascript:;" onClick="'+status_click[data[i].status]+'(this,' + data[i].id + ')"   class="btn btn-xs '+status_btn[data[i].status]+'"><i class="fa '+status_fa[data[i].status]+' bigger-120"></i></a>\n' +
+            '                <a title="删除" href="javascript:;"  onClick="member_del(this,' + data[i].id + ')"  class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>\n' +
+            '                <a title="上移" href="javascript:;"  onClick="member_up(this,' + data[i].id + ')"  class="btn btn-xs btn-green" ><i class="fa fa-arrow-up  bigger-120"></i></a>\n' +
+            '                <a title="下移" href="javascript:;"  onClick="member_down(this,' + data[i].id + ')"  class="btn btn-xs btn-lan" ><i class="fa fa-arrow-down  bigger-120"></i></a>\n' +
+            '                </td>\n' +
+            '</tr>\n';
+    }
+    return content;
+}
+
 //添加bannel
 // function bannelAdd(data){
 //
